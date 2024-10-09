@@ -2930,6 +2930,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 1a0bb9e3-f5aa-4dd1-bbba-88e12807417d
     m_ActionName: Movement/shrink[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1022319970}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: ContGrow
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0898c56a-cc4f-430d-92d4-c956573ff178
+    m_ActionName: Movement/ContGrow[/Keyboard/a]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1022319970}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: ContShrink
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 65863809-3c5e-4fea-8a6e-ebbf68cc9a3a
+    m_ActionName: Movement/ContShrink[/Keyboard/s]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Movement
@@ -2947,7 +2979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfb554b91ddb2a5458e9eed53c21ac40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement: {fileID: -6002543831608748721, guid: 9c514ef56d6cd7a47820dc29c616db58, type: 3}
+  movement: {fileID: 0}
   body: {fileID: 1022319968}
   circleCollider: {fileID: 140187438}
   spriteRenderer: {fileID: 2108200202}
@@ -2967,6 +2999,18 @@ MonoBehaviour:
     m_Bits: 128
   growScaleFactor: 1.25
   shrinkScaleFactor: 0.5
+  maxSize: {x: 0, y: 0, z: 0}
+  minSize: {x: 0, y: 0, z: 0}
+  maxSpeed: 15
+  minSpeed: 6
+  maxMass: 30
+  minMass: 0
+  maxJump: 14
+  minJump: 2
+  maxFSpeed: 35
+  minFSpeed: 8
+  maxfSpeedMult: 2.5
+  minfSpeedMult: 0.1
   _groundState: 0
   _prevState: 0
   endText: {fileID: 1960023275}
