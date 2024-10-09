@@ -62,6 +62,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ContGrow"",
+                    ""type"": ""Button"",
+                    ""id"": ""0898c56a-cc4f-430d-92d4-c956573ff178"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ContShrink"",
+                    ""type"": ""Button"",
+                    ""id"": ""65863809-3c5e-4fea-8a6e-ebbf68cc9a3a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -141,6 +159,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""shrink"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cb8768a1-b1f8-4921-9e0c-1a4fc114f8c3"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ContGrow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""116abaae-c7b6-4000-9e48-35c63db2311e"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ContShrink"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -153,6 +193,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Movement_Jump = m_Movement.FindAction("Jump", throwIfNotFound: true);
         m_Movement_Grow = m_Movement.FindAction("Grow", throwIfNotFound: true);
         m_Movement_shrink = m_Movement.FindAction("shrink", throwIfNotFound: true);
+        m_Movement_ContGrow = m_Movement.FindAction("ContGrow", throwIfNotFound: true);
+        m_Movement_ContShrink = m_Movement.FindAction("ContShrink", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -218,6 +260,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Movement_Jump;
     private readonly InputAction m_Movement_Grow;
     private readonly InputAction m_Movement_shrink;
+    private readonly InputAction m_Movement_ContGrow;
+    private readonly InputAction m_Movement_ContShrink;
     public struct MovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -226,6 +270,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Movement_Jump;
         public InputAction @Grow => m_Wrapper.m_Movement_Grow;
         public InputAction @shrink => m_Wrapper.m_Movement_shrink;
+        public InputAction @ContGrow => m_Wrapper.m_Movement_ContGrow;
+        public InputAction @ContShrink => m_Wrapper.m_Movement_ContShrink;
         public InputActionMap Get() { return m_Wrapper.m_Movement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -247,6 +293,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @shrink.started += instance.OnShrink;
             @shrink.performed += instance.OnShrink;
             @shrink.canceled += instance.OnShrink;
+            @ContGrow.started += instance.OnContGrow;
+            @ContGrow.performed += instance.OnContGrow;
+            @ContGrow.canceled += instance.OnContGrow;
+            @ContShrink.started += instance.OnContShrink;
+            @ContShrink.performed += instance.OnContShrink;
+            @ContShrink.canceled += instance.OnContShrink;
         }
 
         private void UnregisterCallbacks(IMovementActions instance)
@@ -263,6 +315,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @shrink.started -= instance.OnShrink;
             @shrink.performed -= instance.OnShrink;
             @shrink.canceled -= instance.OnShrink;
+            @ContGrow.started -= instance.OnContGrow;
+            @ContGrow.performed -= instance.OnContGrow;
+            @ContGrow.canceled -= instance.OnContGrow;
+            @ContShrink.started -= instance.OnContShrink;
+            @ContShrink.performed -= instance.OnContShrink;
+            @ContShrink.canceled -= instance.OnContShrink;
         }
 
         public void RemoveCallbacks(IMovementActions instance)
@@ -286,5 +344,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnGrow(InputAction.CallbackContext context);
         void OnShrink(InputAction.CallbackContext context);
+        void OnContGrow(InputAction.CallbackContext context);
+        void OnContShrink(InputAction.CallbackContext context);
     }
 }

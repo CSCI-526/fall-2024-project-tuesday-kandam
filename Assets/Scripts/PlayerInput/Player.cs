@@ -45,7 +45,24 @@ public class Player : MonoBehaviour
     [Header("Player Size Change Var")]
     public float growScaleFactor = 1.5f; 
     public float shrinkScaleFactor = 0.5f;
-    
+
+
+    [Header("Cont Ball Size Change Var")]
+    public Vector3 maxSize;
+    public Vector3 minSize;
+    public float maxSpeed;
+    public float minSpeed;
+    public float maxMass;
+    public float minMass;
+    public float maxJump;
+    public float minJump;
+    public float maxFSpeed;
+    public float minFSpeed;
+    public float maxfSpeedMult;
+    public float minfSpeedMult;
+    private float t = 0.5f;
+    private bool growing = false;
+    private bool shrinking = false;
 
     public enum GroundState
     {
@@ -79,7 +96,9 @@ public class Player : MonoBehaviour
     {
         _playerSizeState = PlayerSizeState.STATE_MED;
         originalScale = transform.localScale; // Save the ball's original size
-    }
+        minSize = originalScale * shrinkScaleFactor;
+        maxSize = originalScale * growScaleFactor;
+}
 
     private void FixedUpdate()
     {
@@ -87,6 +106,7 @@ public class Player : MonoBehaviour
         Grounded();
         SlopeCheck();
         Gravity();
+        
     }
 
     private void Update()
@@ -104,6 +124,7 @@ public class Player : MonoBehaviour
         {
             body.velocity = new Vector2(movementInput.x * moveSpeed, body.velocity.y);
         }
+        contSizeChange();
     }
 
     private void SlopeCheck()
@@ -203,7 +224,6 @@ public class Player : MonoBehaviour
             isJumping = true;
             if (context.performed)
             {
-                Debug.Log("Jump");
                 body.velocity = new Vector2(body.velocity.x, jumpHeight);
             }
             else if( context.canceled)
@@ -227,6 +247,64 @@ public class Player : MonoBehaviour
         if (context.phase == InputActionPhase.Performed)
         {
             ShrinkBall();
+        }
+    }
+
+    public void ContGrow(InputAction.CallbackContext context)
+    {
+        if(context.started)
+        {
+            growing = true;
+        }
+        else if (context.canceled)
+        {
+            growing = false;
+        }
+    }
+
+    public void ContShrink(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            shrinking = true;
+        }
+        else if (context.canceled)
+        {
+            shrinking = false;
+        }
+    }
+
+    private void contSizeChange()
+    {
+        if (growing)
+        {
+            t += 0.01f;
+            if(t > 1)
+            {
+                t = 1;
+                return;
+            }
+            transform.localScale = Vector3.Lerp(minSize, maxSize, t);
+            jumpHeight = Mathf.Lerp(minJump, maxJump, t);
+            fallSpeedMultiplier = Mathf.Lerp(maxfSpeedMult, minfSpeedMult, t);
+            moveSpeed = Mathf.Lerp(maxSpeed, minSpeed, t);
+            playerMass = Mathf.Lerp(maxMass, minMass, t);
+            maxFallSpeed = Mathf.Lerp(maxFSpeed, minFSpeed, t);
+        }
+        else if(shrinking)
+        {
+            t -= 0.01f;
+            if (t < 0)
+            {
+                t = 0;
+                return;
+            }
+            transform.localScale = Vector3.Lerp(minSize, maxSize, t);
+            jumpHeight = Mathf.Lerp(minJump, maxJump, t);
+            fallSpeedMultiplier = Mathf.Lerp(maxfSpeedMult, minfSpeedMult, t);
+            moveSpeed = Mathf.Lerp(maxSpeed, minSpeed, t);
+            playerMass = Mathf.Lerp(maxMass, minMass, t);
+            maxFallSpeed = Mathf.Lerp(maxFSpeed, minFSpeed, t);
         }
     }
 
