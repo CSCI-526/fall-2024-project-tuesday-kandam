@@ -46,7 +46,6 @@ public class Player : MonoBehaviour
     public float growScaleFactor = 1.5f; 
     public float shrinkScaleFactor = 0.5f;
 
-
     [Header("Cont Ball Size Change Var")]
     public Vector3 maxSize;
     public Vector3 minSize;
@@ -83,13 +82,14 @@ public class Player : MonoBehaviour
         STATE_MOVING
     }
 
-
     public GroundState _groundState;
     public GroundState _prevState;
     private PlayerSizeState _playerSizeState;
     private PlayerMoveState _playerMoveState;
 
     private Vector3 originalScale; // Store original size for shrinking back
+    private Vector3 checkpointPosition; // Store the checkpoint position
+    private bool hasCheckpoint; // Track if the player has passed a checkpoint
 
     // Start is called before the first frame update
     void Start()
@@ -98,7 +98,7 @@ public class Player : MonoBehaviour
         originalScale = transform.localScale; // Save the ball's original size
         minSize = originalScale * shrinkScaleFactor;
         maxSize = originalScale * growScaleFactor;
-}
+    }
 
     private void FixedUpdate()
     {
@@ -106,21 +106,19 @@ public class Player : MonoBehaviour
         Grounded();
         SlopeCheck();
         Gravity();
-        
     }
 
     private void Update()
     {
-        
-        if(isGrounded && !isOnSlope & !isJumping)
+        if (isGrounded && !isOnSlope && !isJumping)
         {
             body.velocity = new Vector2(movementInput.x * moveSpeed, 0);
         }
-        else if(isGrounded && isOnSlope && !isJumping)
-        { 
+        else if (isGrounded && isOnSlope && !isJumping)
+        {
             body.velocity = new Vector2(-movementInput.x * slopeNormalPerp.x * moveSpeed, -movementInput.x * slopeNormalPerp.y * moveSpeed);
         }
-        else if(!isGrounded)
+        else if (!isGrounded)
         {
             body.velocity = new Vector2(movementInput.x * moveSpeed, body.velocity.y);
         }
@@ -144,7 +142,7 @@ public class Player : MonoBehaviour
             isOnSlope = true;
             slopeSideAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
         }
-        else if(slopeHitBack)
+        else if (slopeHitBack)
         {
             isOnSlope = true;
             slopeSideAngle = Vector2.Angle(slopeHitBack.normal, Vector2.up);
@@ -154,19 +152,18 @@ public class Player : MonoBehaviour
             slopeSideAngle = 0.0f;
             isOnSlope = false;
         }
-
     }
 
     private void SlopeCheckVertical(Vector2 checkPos)
     {
         RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.down, slopeCheckDistance, ground);
 
-        if(hit)
+        if (hit)
         {
             slopeNormalPerp = Vector2.Perpendicular(hit.normal).normalized;
             slopeDownAngle = Vector2.Angle(hit.normal, Vector2.up);
 
-            if(slopeDownAngle != slopeDownAngleOld)
+            if (slopeDownAngle != slopeDownAngleOld)
             {
                 isOnSlope = true;
             }
@@ -179,7 +176,7 @@ public class Player : MonoBehaviour
 
     private void Gravity()
     {
-        if(body.velocity.y < 0)
+        if (body.velocity.y < 0)
         {
             body.gravityScale = baseGravity * fallSpeedMultiplier;
             body.velocity = new Vector2(body.velocity.x, Mathf.Max(body.velocity.y, -maxFallSpeed));
@@ -189,11 +186,12 @@ public class Player : MonoBehaviour
             body.gravityScale = baseGravity;
         }
     }
+
     private bool Grounded()
     {
         isGrounded = Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, ground);
 
-        if(body.velocity.y <= 0.0f)
+        if (body.velocity.y <= 0.0f)
         {
             isJumping = false;
         }
@@ -201,14 +199,13 @@ public class Player : MonoBehaviour
         if (isGrounded && !isJumping)
         {
             _groundState = GroundState.STATE_STANDING;
-
             return true;
         }
         else
         {
             _groundState = GroundState.STATE_JUMPING;
         }
-        
+
         return false;
     }
 
@@ -219,21 +216,19 @@ public class Player : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if(isGrounded)
+        if (isGrounded)
         {
             isJumping = true;
             if (context.performed)
             {
                 body.velocity = new Vector2(body.velocity.x, jumpHeight);
             }
-            else if( context.canceled)
+            else if (context.canceled)
             {
                 body.velocity = new Vector2(body.velocity.x, body.velocity.y * 0.5f);
             }
         }
-        
     }
-
     public void OnGrow(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
@@ -249,7 +244,6 @@ public class Player : MonoBehaviour
             ShrinkBall();
         }
     }
-
     public void ContGrow(InputAction.CallbackContext context)
     {
         if(context.started)
@@ -273,13 +267,12 @@ public class Player : MonoBehaviour
             shrinking = false;
         }
     }
-
     private void contSizeChange()
     {
         if (growing)
         {
             t += 0.01f;
-            if(t > 1)
+            if (t > 1)
             {
                 t = 1;
                 return;
@@ -291,7 +284,7 @@ public class Player : MonoBehaviour
             playerMass = Mathf.Lerp(maxMass, minMass, t);
             maxFallSpeed = Mathf.Lerp(maxFSpeed, minFSpeed, t);
         }
-        else if(shrinking)
+        else if (shrinking)
         {
             t -= 0.01f;
             if (t < 0)
@@ -307,8 +300,6 @@ public class Player : MonoBehaviour
             maxFallSpeed = Mathf.Lerp(maxFSpeed, minFSpeed, t);
         }
     }
-
-    // Method to grow the ball
     private void GrowBall()
     {
         if(_playerSizeState != PlayerSizeState.STATE_LARGE)
@@ -324,8 +315,6 @@ public class Player : MonoBehaviour
             ChangePlayerSizeState();
         }
     }
-
-    // Method to shrink the ball
     private void ShrinkBall()
     {
         if (_playerSizeState != PlayerSizeState.STATE_SMALL)
@@ -341,7 +330,6 @@ public class Player : MonoBehaviour
             ChangePlayerSizeState();
         }
     }
-
     private void ChangePlayerSizeState()
     {
         if(_playerSizeState == PlayerSizeState.STATE_MED)
@@ -372,6 +360,26 @@ public class Player : MonoBehaviour
             maxFallSpeed = 8f;
         }
     }
+    // Method to set checkpoint position
+    public void SetCheckpoint(Vector3 position)
+    {
+        checkpointPosition = position;
+        hasCheckpoint = true; // Mark that the player has passed a checkpoint
+    }
+
+    // Method to respawn player
+    public void Respawn()
+    {
+        if (hasCheckpoint)
+        {
+            transform.position = checkpointPosition; // Respawn at checkpoint
+        }
+        else
+        {
+            // Respawn at the original position (you may want to set this position)
+            transform.position = new Vector3(0, 0, 0); // Replace with your starting position
+        }
+    }
 
     private void OnDrawGizmos()
     {
@@ -389,17 +397,47 @@ public class Player : MonoBehaviour
         // Check if the collided object has the correct tag
         if (other.CompareTag("Diamond_Tag")) 
         {
-            Destroy(other.gameObject); // Destroy the diamond object
-            Debug.Log("Diamond destroyed!");
+            // Handle the logic for collecting a diamond here
+            Debug.Log("Collected a diamond!");
+            Destroy(other.gameObject); // Example: destroy the diamond object
         }
-
-        if (other.CompareTag("End_Plate"))  // Check if the player collides with the platform
+        else if (other.CompareTag("Spike_Tag")) 
         {
-            endText.SetActive(true); // Activate the text when the player reaches the platform
-            Debug.Log("You Win!");
+            // Handle the logic for colliding with a spike
+            Debug.Log("Hit a spike! Respawning...");
+            Respawn(); // Call the respawn method
+        }
+        else if (other.CompareTag("Checkpoint_Tag")) 
+        {
+            // Handle the logic for checkpoints
+            Debug.Log("Checkpoint reached!");
+            SetCheckpoint(transform.position); // Call the SetCheckpoint method with current position
+        }
+        else if (other.CompareTag("End_Tag")) 
+        {
+            endText.SetActive(true);
         }
     }
 
+    private void OnEnable()
+    {
+        if (movement != null && movement.action != null)
+        {
+            movement.action.performed += Move;
+            movement.action.canceled += Move;
+        }
+        else
+        {
+            Debug.LogWarning("Movement input action reference is not set in Player script.");
+        }
+    }
 
-
+    private void OnDisable()
+    {
+        if (movement != null && movement.action != null)
+        {
+            movement.action.performed -= Move;
+            movement.action.canceled -= Move;
+        }
+    }
 }
