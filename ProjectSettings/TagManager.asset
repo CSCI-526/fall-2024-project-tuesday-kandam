@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Diamond_Tag
   - End_Plate
+  - Checkpoint_Tag
+  - SpikeTag
+  - Spike_Tag
   layers:
   - Default
   - TransparentFX
