@@ -108,6 +108,10 @@ public class Player : MonoBehaviour
         Gravity();
     }
 
+    public PlayerSizeState getPlayerSize()
+    {
+        return _playerSizeState;
+    }
     private void Update()
     {
         if (isGrounded && !isOnSlope && !isJumping)
