@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "fall-2024-project-tuesday-kandam-main.sln"
+    "dotnet.defaultSolution": "fall-2024-project-tuesday-kandam.sln"
 }

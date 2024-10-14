@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
 
     private Vector3 originalScale; // Store original size for shrinking back
     private Vector3 checkpointPosition; // Store the checkpoint position
-    private bool hasCheckpoint; // Track if the player has passed a checkpoint
+    private bool hasCheckpoint; 
 
     // Start is called before the first frame update
     void Start()
@@ -386,24 +386,22 @@ public class Player : MonoBehaviour
             maxFallSpeed = 8f;
         }
     }
-    // Method to set checkpoint position
+
     public void SetCheckpoint(Vector3 position)
     {
         checkpointPosition = position;
-        hasCheckpoint = true; // Mark that the player has passed a checkpoint
+        hasCheckpoint = true; 
     }
 
-    // Method to respawn player
     public void Respawn()
     {
         if (hasCheckpoint)
         {
-            transform.position = checkpointPosition; // Respawn at checkpoint
+            transform.position = checkpointPosition; 
         }
         else
         {
-            // Respawn at the original position (you may want to set this position)
-            transform.position = new Vector3(0, 0, 0); // Replace with your starting position
+            transform.position = new Vector3(-14, 0, 0); 
         }
     }
 
@@ -419,29 +417,25 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Log the name of the collided object for debugging
         Debug.Log("Collided with: " + other.gameObject.name);
 
-        // Check if the collided object has the correct tag
         if (other.CompareTag("Diamond_Tag"))
         {
-            // Handle the logic for collecting a diamond here
             Debug.Log("Collected a diamond!");
-            Destroy(other.gameObject); // Example: destroy the diamond object
+            Destroy(other.gameObject); 
         }
         
         if (other.CompareTag("Spike_Tag"))
         {
-            // Handle the logic for colliding with a spike
+
             Debug.Log("Hit a spike! Respawning...");
-            Respawn(); // Call the respawn method
+            Respawn(); 
         }
         
         if (other.CompareTag("Checkpoint_Tag"))
         {
-            // Handle the logic for checkpoints
             Debug.Log("Checkpoint reached!");
-            SetCheckpoint(transform.position); // Call the SetCheckpoint method with current position
+            SetCheckpoint(transform.position); 
         }
         
         if (other.CompareTag("End_Plate"))
