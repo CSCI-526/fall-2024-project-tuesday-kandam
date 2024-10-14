@@ -414,6 +414,7 @@ public class Player : MonoBehaviour
     public GameObject endText;
     private int brick = 0;
     public GameObject HEXKey;
+    public GameObject Hex_KeyPlate;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -464,6 +465,12 @@ public class Player : MonoBehaviour
             }
         }
 
+        if (other.gameObject.CompareTag("Hex_Key_Tag")) // Check for the HEXKey
+        {
+            HEXKey.SetActive(false);
+            Hex_KeyPlate.SetActive(false); // Destroy hexkey_plate object
+            Debug.Log("Touched Hex_Key_Tag and destroyed Hex_Key_Plate!");
+        }
     }
 
 }
