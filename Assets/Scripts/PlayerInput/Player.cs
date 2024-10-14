@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
     public LayerMask ground;
 
     [Header("Player Size Change Var")]
-    public float growScaleFactor = 1.5f; 
+    public float growScaleFactor = 1.5f;
     public float shrinkScaleFactor = 0.5f;
 
     [Header("Cont Ball Size Change Var")]
@@ -98,6 +98,28 @@ public class Player : MonoBehaviour
         originalScale = transform.localScale; // Save the ball's original size
         minSize = originalScale * shrinkScaleFactor;
         maxSize = originalScale * growScaleFactor;
+    }
+
+    private void OnEnable()
+    {
+        if (movement != null && movement.action != null)
+        {
+            movement.action.performed += Move;
+            movement.action.canceled += Move;
+        }
+        else
+        {
+            Debug.LogWarning("Movement input action reference is not set in Player script.");
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (movement != null && movement.action != null)
+        {
+            movement.action.performed -= Move;
+            movement.action.canceled -= Move;
+        }
     }
 
     private void FixedUpdate()
@@ -250,7 +272,7 @@ public class Player : MonoBehaviour
     }
     public void ContGrow(InputAction.CallbackContext context)
     {
-        if(context.started)
+        if (context.started)
         {
             growing = true;
         }
@@ -306,9 +328,9 @@ public class Player : MonoBehaviour
     }
     private void GrowBall()
     {
-        if(_playerSizeState != PlayerSizeState.STATE_LARGE)
+        if (_playerSizeState != PlayerSizeState.STATE_LARGE)
         {
-            if(_playerSizeState == PlayerSizeState.STATE_MED)
+            if (_playerSizeState == PlayerSizeState.STATE_MED)
             {
                 _playerSizeState = PlayerSizeState.STATE_LARGE;
             }
@@ -336,7 +358,7 @@ public class Player : MonoBehaviour
     }
     private void ChangePlayerSizeState()
     {
-        if(_playerSizeState == PlayerSizeState.STATE_MED)
+        if (_playerSizeState == PlayerSizeState.STATE_MED)
         {
             transform.localScale = originalScale;
             jumpHeight = 5;
@@ -345,7 +367,7 @@ public class Player : MonoBehaviour
             playerMass = 10f;
             maxFallSpeed = 25;
         }
-        else if(_playerSizeState == PlayerSizeState.STATE_SMALL)
+        else if (_playerSizeState == PlayerSizeState.STATE_SMALL)
         {
             transform.localScale = originalScale * shrinkScaleFactor;
             jumpHeight = 5;
@@ -354,7 +376,7 @@ public class Player : MonoBehaviour
             playerMass = 30f;
             maxFallSpeed = 35;
         }
-        else if(_playerSizeState == PlayerSizeState.STATE_LARGE)
+        else if (_playerSizeState == PlayerSizeState.STATE_LARGE)
         {
             transform.localScale = originalScale * growScaleFactor;
             jumpHeight = 14;
@@ -392,6 +414,8 @@ public class Player : MonoBehaviour
     }
 
     public GameObject endText;
+    private int brick = 0;
+    public GameObject HEXKey;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -399,49 +423,59 @@ public class Player : MonoBehaviour
         Debug.Log("Collided with: " + other.gameObject.name);
 
         // Check if the collided object has the correct tag
-        if (other.CompareTag("Diamond_Tag")) 
+        if (other.CompareTag("Diamond_Tag"))
         {
             // Handle the logic for collecting a diamond here
             Debug.Log("Collected a diamond!");
             Destroy(other.gameObject); // Example: destroy the diamond object
         }
-        else if (other.CompareTag("Spike_Tag")) 
+        
+        if (other.CompareTag("Spike_Tag"))
         {
             // Handle the logic for colliding with a spike
             Debug.Log("Hit a spike! Respawning...");
             Respawn(); // Call the respawn method
         }
-        else if (other.CompareTag("Checkpoint_Tag")) 
+        
+        if (other.CompareTag("Checkpoint_Tag"))
         {
             // Handle the logic for checkpoints
             Debug.Log("Checkpoint reached!");
             SetCheckpoint(transform.position); // Call the SetCheckpoint method with current position
         }
-        else if (other.CompareTag("End_Tag")) 
+        
+        if (other.CompareTag("End_Plate"))
         {
             endText.SetActive(true);
         }
+
+        if (other.CompareTag("Hex_Key_Tag")) // Check for the HEXKey
+        {
+            Destroy(GameObject.Find("Hex_Key_Plate")); // Destroy hexkey_plate object
+            HEXKey.SetActive(false);
+            Debug.Log("Touched HEXKey and destroyed hexkey_plate!");
+            
+        }
+
     }
 
-    private void OnEnable()
-    {
-        if (movement != null && movement.action != null)
-        {
-            movement.action.performed += Move;
-            movement.action.canceled += Move;
-        }
-        else
-        {
-            Debug.LogWarning("Movement input action reference is not set in Player script.");
-        }
-    }
 
-    private void OnDisable()
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if (movement != null && movement.action != null)
+        if (other.gameObject.CompareTag("mario_brick"))
         {
-            movement.action.performed -= Move;
-            movement.action.canceled -= Move;
+            brick++; // Increment the counter
+
+            // Make the special object visible only after 4 collisions
+            if (brick >= 4)
+            {
+                HEXKey.SetActive(true); // Make the object visible
+                Debug.Log("Special object is now visible!");
+            }
+            else
+            {
+                Debug.Log("Brick collision count: " + brick);
+            }
         }
     }
 }

@@ -9,6 +9,9 @@ TagManager:
   - Checkpoint_Tag
   - SpikeTag
   - Spike_Tag
+  - mario_brick
+  - Hex_Key_Tag
+  - Hex_Key_Plate
   layers:
   - Default
   - TransparentFX
