@@ -14,7 +14,7 @@ public class FallingPlatform : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Player player = collision.gameObject.GetComponent<Player>();
-            if(player != null && player._prevState == Player.GroundState.STATE_JUMPING)
+            if(player != null && player.getPlayerSize() == Player.PlayerSizeState.STATE_SMALL)
             {
                 StartCoroutine(Fall());
             }
