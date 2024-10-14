@@ -443,14 +443,6 @@ public class Player : MonoBehaviour
             endText.SetActive(true);
         }
 
-        if (other.CompareTag("Hex_Key_Tag")) // Check for the HEXKey
-        {
-            Destroy(GameObject.Find("Hex_Key_Plate")); // Destroy hexkey_plate object
-            HEXKey.SetActive(false);
-            Debug.Log("Touched HEXKey and destroyed hexkey_plate!");
-            
-        }
-
     }
 
 
@@ -471,5 +463,7 @@ public class Player : MonoBehaviour
                 Debug.Log("Brick collision count: " + brick);
             }
         }
+
     }
+
 }
