@@ -40,24 +40,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "ContGrow",
-                    "type": "Button",
-                    "id": "0898c56a-cc4f-430d-92d4-c956573ff178",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "ContShrink",
-                    "type": "Button",
-                    "id": "65863809-3c5e-4fea-8a6e-ebbf68cc9a3a",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -135,28 +117,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "shrink",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "cb8768a1-b1f8-4921-9e0c-1a4fc114f8c3",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ContGrow",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "116abaae-c7b6-4000-9e48-35c63db2311e",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ContShrink",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

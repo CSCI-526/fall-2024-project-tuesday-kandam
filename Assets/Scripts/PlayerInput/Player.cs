@@ -88,6 +88,7 @@ public class Player : MonoBehaviour
     private PlayerMoveState _playerMoveState;
 
     private Vector3 originalScale; // Store original size for shrinking back
+    private float radius;
     private Vector3 checkpointPosition; // Store the checkpoint position
     private bool hasCheckpoint; 
 
@@ -98,6 +99,7 @@ public class Player : MonoBehaviour
         originalScale = transform.localScale; // Save the ball's original size
         minSize = originalScale * shrinkScaleFactor;
         maxSize = originalScale * growScaleFactor;
+        radius = circleCollider.radius;
     }
 
     private void OnEnable()
@@ -134,11 +136,13 @@ public class Player : MonoBehaviour
     {
         return _playerSizeState;
     }
-    private void Update()
+
+    private void HandleMovement()
     {
+        
         if (isGrounded && !isOnSlope && !isJumping)
         {
-            body.velocity = new Vector2(movementInput.x * moveSpeed, 0);
+            body.velocity = new Vector2(movementInput.x * moveSpeed, body.velocity.y);
         }
         else if (isGrounded && isOnSlope && !isJumping)
         {
@@ -148,12 +152,15 @@ public class Player : MonoBehaviour
         {
             body.velocity = new Vector2(movementInput.x * moveSpeed, body.velocity.y);
         }
-        contSizeChange();
+    }
+    private void Update()
+    {
+       HandleMovement();
     }
 
     private void SlopeCheck()
     {
-        Vector2 checkPos = transform.position - new Vector3(0.0f, circleCollider.radius);
+        Vector2 checkPos = transform.position - new Vector3(0.0f, radius);
         SlopeCheckHorizontal(checkPos);
         SlopeCheckVertical(checkPos);
     }
@@ -178,6 +185,8 @@ public class Player : MonoBehaviour
             slopeSideAngle = 0.0f;
             isOnSlope = false;
         }
+
+        Debug.DrawRay(checkPos, transform.right, Color.red);
     }
 
     private void SlopeCheckVertical(Vector2 checkPos)
@@ -195,8 +204,6 @@ public class Player : MonoBehaviour
             }
             slopeDownAngleOld = slopeDownAngle;
 
-            Debug.DrawRay(hit.point, slopeNormalPerp, Color.red);
-            Debug.DrawRay(hit.point, hit.normal, Color.green);
         }
     }
 
@@ -270,62 +277,6 @@ public class Player : MonoBehaviour
             ShrinkBall();
         }
     }
-    public void ContGrow(InputAction.CallbackContext context)
-    {
-        if (context.started)
-        {
-            growing = true;
-        }
-        else if (context.canceled)
-        {
-            growing = false;
-        }
-    }
-
-    public void ContShrink(InputAction.CallbackContext context)
-    {
-        if (context.started)
-        {
-            shrinking = true;
-        }
-        else if (context.canceled)
-        {
-            shrinking = false;
-        }
-    }
-    private void contSizeChange()
-    {
-        if (growing)
-        {
-            t += 0.01f;
-            if (t > 1)
-            {
-                t = 1;
-                return;
-            }
-            transform.localScale = Vector3.Lerp(minSize, maxSize, t);
-            jumpHeight = Mathf.Lerp(minJump, maxJump, t);
-            fallSpeedMultiplier = Mathf.Lerp(maxfSpeedMult, minfSpeedMult, t);
-            moveSpeed = Mathf.Lerp(maxSpeed, minSpeed, t);
-            playerMass = Mathf.Lerp(maxMass, minMass, t);
-            maxFallSpeed = Mathf.Lerp(maxFSpeed, minFSpeed, t);
-        }
-        else if (shrinking)
-        {
-            t -= 0.01f;
-            if (t < 0)
-            {
-                t = 0;
-                return;
-            }
-            transform.localScale = Vector3.Lerp(minSize, maxSize, t);
-            jumpHeight = Mathf.Lerp(minJump, maxJump, t);
-            fallSpeedMultiplier = Mathf.Lerp(maxfSpeedMult, minfSpeedMult, t);
-            moveSpeed = Mathf.Lerp(maxSpeed, minSpeed, t);
-            playerMass = Mathf.Lerp(maxMass, minMass, t);
-            maxFallSpeed = Mathf.Lerp(maxFSpeed, minFSpeed, t);
-        }
-    }
     private void GrowBall()
     {
         if (_playerSizeState != PlayerSizeState.STATE_LARGE)
@@ -366,6 +317,7 @@ public class Player : MonoBehaviour
             moveSpeed = 10;
             playerMass = 10f;
             maxFallSpeed = 25;
+            radius = circleCollider.radius;
         }
         else if (_playerSizeState == PlayerSizeState.STATE_SMALL)
         {
@@ -375,6 +327,7 @@ public class Player : MonoBehaviour
             moveSpeed = 15;
             playerMass = 30f;
             maxFallSpeed = 35;
+            radius = circleCollider.radius * shrinkScaleFactor;
         }
         else if (_playerSizeState == PlayerSizeState.STATE_LARGE)
         {
@@ -384,6 +337,7 @@ public class Player : MonoBehaviour
             moveSpeed = 6;
             playerMass = 0f;
             maxFallSpeed = 8f;
+            radius = circleCollider.radius * growScaleFactor;
         }
     }
 

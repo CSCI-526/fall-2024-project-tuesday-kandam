@@ -6695,7 +6695,7 @@ Transform:
   m_GameObject: {fileID: 1022319964}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.91, y: 1.33, z: 0}
+  m_LocalPosition: {x: -14.03, y: 1.51, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6821,38 +6821,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 1a0bb9e3-f5aa-4dd1-bbba-88e12807417d
     m_ActionName: Movement/shrink[/Keyboard/q]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1022319970}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: ContGrow
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 0898c56a-cc4f-430d-92d4-c956573ff178
-    m_ActionName: Movement/ContGrow[/Keyboard/a]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1022319970}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: ContShrink
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 65863809-3c5e-4fea-8a6e-ebbf68cc9a3a
-    m_ActionName: Movement/ContShrink[/Keyboard/s]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Movement
@@ -6874,7 +6842,7 @@ MonoBehaviour:
   body: {fileID: 1022319968}
   circleCollider: {fileID: 140187438}
   spriteRenderer: {fileID: 2108200202}
-  slopeCheckDistance: 0.5
+  slopeCheckDistance: 0.2
   moveSpeed: 15
   jumpHeight: 5
   baseGravity: 2
@@ -7858,7 +7826,7 @@ GameObject:
   - component: {fileID: 1231107274}
   - component: {fileID: 1231107272}
   - component: {fileID: 1231107273}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Anchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13820,7 +13788,7 @@ GameObject:
   - component: {fileID: 2137923680}
   - component: {fileID: 2137923679}
   - component: {fileID: 2137923684}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: SpringTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14000,7 +13968,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0de7e056f702fdb43914240000c8dfda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxForce: 600
+  maxForce: 3000
   isHeavy: 0
   isTouching: 0
 --- !u!1660057539 &9223372036854775807
