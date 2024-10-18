@@ -92,6 +92,10 @@ public class Player : MonoBehaviour
     private Vector3 checkpointPosition; // Store the checkpoint position
     private bool hasCheckpoint; 
 
+    // Metrics
+    private Dictionary<PlayerSizeState, int> sizeStateCounts = new Dictionary<PlayerSizeState, int>();
+    private Dictionary<Vector3, int> checkpointRespawnCounts = new Dictionary<Vector3, int>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -100,6 +104,11 @@ public class Player : MonoBehaviour
         minSize = originalScale * shrinkScaleFactor;
         maxSize = originalScale * growScaleFactor;
         radius = circleCollider.radius;
+
+        // Initialize the size state counts
+        sizeStateCounts[PlayerSizeState.STATE_SMALL] = 0;
+        sizeStateCounts[PlayerSizeState.STATE_MED] = 0;
+        sizeStateCounts[PlayerSizeState.STATE_LARGE] = 0;
     }
 
     private void OnEnable()
@@ -139,7 +148,6 @@ public class Player : MonoBehaviour
 
     private void HandleMovement()
     {
-        
         if (isGrounded && !isOnSlope && !isJumping)
         {
             body.velocity = new Vector2(movementInput.x * moveSpeed, body.velocity.y);
@@ -153,6 +161,7 @@ public class Player : MonoBehaviour
             body.velocity = new Vector2(movementInput.x * moveSpeed, body.velocity.y);
         }
     }
+
     private void Update()
     {
        HandleMovement();
@@ -203,7 +212,6 @@ public class Player : MonoBehaviour
                 isOnSlope = true;
             }
             slopeDownAngleOld = slopeDownAngle;
-
         }
     }
 
@@ -262,6 +270,7 @@ public class Player : MonoBehaviour
             }
         }
     }
+
     public void OnGrow(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
@@ -277,6 +286,7 @@ public class Player : MonoBehaviour
             ShrinkBall();
         }
     }
+
     private void GrowBall()
     {
         if (_playerSizeState != PlayerSizeState.STATE_LARGE)
@@ -292,6 +302,7 @@ public class Player : MonoBehaviour
             ChangePlayerSizeState();
         }
     }
+
     private void ShrinkBall()
     {
         if (_playerSizeState != PlayerSizeState.STATE_SMALL)
@@ -307,6 +318,7 @@ public class Player : MonoBehaviour
             ChangePlayerSizeState();
         }
     }
+
     private void ChangePlayerSizeState()
     {
         if (_playerSizeState == PlayerSizeState.STATE_MED)
@@ -339,6 +351,9 @@ public class Player : MonoBehaviour
             maxFallSpeed = 8f;
             radius = circleCollider.radius * growScaleFactor;
         }
+
+        // Update the size state count
+        sizeStateCounts[_playerSizeState]++;
     }
 
     public void SetCheckpoint(Vector3 position)
@@ -351,11 +366,17 @@ public class Player : MonoBehaviour
     {
         if (hasCheckpoint)
         {
-            transform.position = checkpointPosition; 
+            transform.position = checkpointPosition;
+            // Update the respawn count for the current checkpoint 
+            if (!checkpointRespawnCounts.ContainsKey(checkpointPosition))
+            {
+                checkpointRespawnCounts[checkpointPosition] = 0;
+            }
+            checkpointRespawnCounts[checkpointPosition]++;
         }
         else
         {
-            transform.position = new Vector3(-14, 0, 0); 
+            transform.position = new Vector3(-14, 0, 0);
         }
     }
 
@@ -382,7 +403,6 @@ public class Player : MonoBehaviour
         
         if (other.CompareTag("Spike_Tag"))
         {
-
             Debug.Log("Hit a spike! Respawning...");
             Respawn(); 
         }
@@ -397,9 +417,7 @@ public class Player : MonoBehaviour
         {
             endText.SetActive(true);
         }
-
     }
-
 
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -427,4 +445,29 @@ public class Player : MonoBehaviour
         }
     }
 
+    // Get the most common size state
+    public PlayerSizeState GetMostCommonSizeState()
+    {
+        PlayerSizeState mostCommonState = PlayerSizeState.STATE_MED;
+        int maxCount = 0;
+        foreach (var state in sizeStateCounts)
+        {
+            if (state.Value > maxCount)
+            {
+                maxCount = state.Value;
+                mostCommonState = state.Key;
+            }
+        }
+        return mostCommonState;
+    }
+
+    // Get respawn count for a specific checkpoint
+    public int GetRespawnCount(Vector3 checkpointPosition)
+    {
+        if (checkpointRespawnCounts.ContainsKey(checkpointPosition))
+        {
+            return checkpointRespawnCounts[checkpointPosition];
+        }
+        return 0;
+    }
 }
