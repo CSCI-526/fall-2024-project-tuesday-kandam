@@ -8,11 +8,7 @@ public class ToggleControlsPanel : MonoBehaviour
 
     void Start()
     {
-        // Ensure the panel starts as hidden
-        if (panel != null)
-        {
-            panel.SetActive(false);
-        }
+        
 
         // Disable button navigation to prevent space/enter triggering
         if (toggleButton != null)
