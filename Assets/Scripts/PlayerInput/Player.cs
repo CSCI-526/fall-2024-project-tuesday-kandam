@@ -400,31 +400,57 @@ public class Player : MonoBehaviour
 
     }
 
-
     private void OnCollisionEnter2D(Collision2D other)
     {
+        // Check if the object has the tag 'mario_brick'
         if (other.gameObject.CompareTag("mario_brick"))
         {
-            brick++; // Increment the counter
+            brick++;  // Increment the counter
 
-            // Make the special object visible only after 4 collisions
-            if (brick >= 4)
+            // Get the SpriteRenderer component of the brick
+            SpriteRenderer brickRenderer = other.gameObject.GetComponent<SpriteRenderer>();
+
+            if (brick == 1)
             {
+                // Change the color of the brick to the specified hex color
+                if (brickRenderer != null)
+                {
+                    Color newColor;
+                    if (ColorUtility.TryParseHtmlString("#9D4649", out newColor))
+                    {
+                        brickRenderer.color = newColor;  // Change to the specified hex color
+                        Debug.Log("Brick color changed to #9D4649!");
+                    }
+                }
+            }
+            else if (brick >= 2)
+            {
+                // Destroy the brick after the second collision
+                Destroy(other.gameObject);
+                Debug.Log("Brick destroyed!");
+
                 HEXKey.SetActive(true); // Make the object visible
                 Debug.Log("Special object is now visible!");
             }
-            else
-            {
-                Debug.Log("Brick collision count: " + brick);
-            }
         }
 
-        if (other.gameObject.CompareTag("Hex_Key_Tag")) // Check for the HEXKey
+        // Check if the object has the tag 'Hex_Key_Tag'
+        if (other.gameObject.CompareTag("Hex_Key_Tag"))
         {
-            HEXKey.SetActive(false);
-            Hex_KeyPlate.SetActive(false); // Destroy hexkey_plate object
-            Debug.Log("Touched Hex_Key_Tag and destroyed Hex_Key_Plate!");
+            // Destroy HEXKey and Hex_KeyPlate
+            if (HEXKey != null)
+            {
+                Destroy(HEXKey);
+                Debug.Log("HEXKey destroyed!");
+            }
+
+            if (Hex_KeyPlate != null)
+            {
+                Destroy(Hex_KeyPlate);
+                Debug.Log("Hex_KeyPlate destroyed!");
+            }
         }
     }
+
 
 }

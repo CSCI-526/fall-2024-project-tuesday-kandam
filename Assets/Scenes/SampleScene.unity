@@ -1007,10 +1007,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 443632428}
-  - {fileID: 1493312853}
-  - {fileID: 2116198817}
-  - {fileID: 1340275441}
-  - {fileID: 810627647}
   - {fileID: 1905832509}
   - {fileID: 217067380}
   - {fileID: 1164073222}
@@ -5369,7 +5365,7 @@ GameObject:
   - component: {fileID: 810627649}
   - component: {fileID: 810627648}
   m_Layer: 7
-  m_Name: Platform 1 (4)
+  m_Name: Brick 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5384,11 +5380,11 @@ Transform:
   m_GameObject: {fileID: 810627646}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -14.1, y: -16.16, z: 0.090019114}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalPosition: {x: -1.8000005, y: -9.139374, z: 0}
+  m_LocalScale: {x: 0.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 145213840}
+  m_Father: {fileID: 1012184883}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &810627648
 BoxCollider2D:
@@ -7171,6 +7167,41 @@ Transform:
   - {fileID: 1530213554}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1012184882
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1012184883}
+  m_Layer: 7
+  m_Name: Bricks
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1012184883
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012184882}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -8.862278, y: 5.36, z: 0}
+  m_LocalScale: {x: 3, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 810627647}
+  - {fileID: 1493312853}
+  - {fileID: 2116198817}
+  - {fileID: 1340275441}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1022319964
 GameObject:
   m_ObjectHideFlags: 0
@@ -7199,7 +7230,7 @@ Transform:
   m_GameObject: {fileID: 1022319964}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.03, y: 1.51, z: 0}
+  m_LocalPosition: {x: -14.03, y: 1.44, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8388,7 +8419,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -22}
   m_SizeDelta: {x: 900, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1212018315
@@ -9213,7 +9244,7 @@ GameObject:
   - component: {fileID: 1340275443}
   - component: {fileID: 1340275442}
   m_Layer: 7
-  m_Name: Platform 1 (3)
+  m_Name: Brick 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9228,11 +9259,11 @@ Transform:
   m_GameObject: {fileID: 1340275440}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.74, y: -16.16, z: 0.090019114}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalPosition: {x: -0.013333639, y: -9.139374, z: 0}
+  m_LocalScale: {x: 0.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 145213840}
+  m_Father: {fileID: 1012184883}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1340275442
 BoxCollider2D:
@@ -10214,7 +10245,7 @@ GameObject:
   - component: {fileID: 1493312855}
   - component: {fileID: 1493312854}
   m_Layer: 7
-  m_Name: Platform 1 (1)
+  m_Name: Brick 2
   m_TagString: mario_brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10229,11 +10260,11 @@ Transform:
   m_GameObject: {fileID: 1493312852}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.24, y: -16.16, z: 0.090019114}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalPosition: {x: -1.1800003, y: -9.139374, z: 0}
+  m_LocalScale: {x: 0.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 145213840}
+  m_Father: {fileID: 1012184883}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1493312854
 BoxCollider2D:
@@ -14679,7 +14710,7 @@ GameObject:
   - component: {fileID: 2116198819}
   - component: {fileID: 2116198818}
   m_Layer: 7
-  m_Name: Platform 1 (2)
+  m_Name: Brick 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14694,11 +14725,11 @@ Transform:
   m_GameObject: {fileID: 2116198816}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.5, y: -16.16, z: 0.090019114}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalPosition: {x: -0.6000004, y: -9.139374, z: 0}
+  m_LocalScale: {x: 0.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 145213840}
+  m_Father: {fileID: 1012184883}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &2116198818
 BoxCollider2D:
@@ -15028,6 +15059,7 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 1022319967}
   - {fileID: 1395965288}
+  - {fileID: 1012184883}
   - {fileID: 145213840}
   - {fileID: 560267139}
   - {fileID: 906706814}
