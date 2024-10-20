@@ -6679,6 +6679,7 @@ GameObject:
   - component: {fileID: 1022319968}
   - component: {fileID: 1022319970}
   - component: {fileID: 1022319969}
+  - component: {fileID: 1022319971}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -6875,6 +6876,18 @@ MonoBehaviour:
   endText: {fileID: 1960023275}
   HEXKey: {fileID: 74110919}
   Hex_KeyPlate: {fileID: 802163446}
+--- !u!114 &1022319971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022319964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ce5940b4560b4f14a7f4f36adea7e3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1075207720
 GameObject:
   m_ObjectHideFlags: 0

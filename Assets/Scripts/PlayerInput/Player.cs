@@ -390,6 +390,7 @@ public class Player : MonoBehaviour
     private int brick = 0;
     public GameObject HEXKey;
     public GameObject Hex_KeyPlate;
+    public GameObject googleMetricsSender;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -416,6 +417,9 @@ public class Player : MonoBehaviour
         if (other.CompareTag("End_Plate"))
         {
             endText.SetActive(true);
+            Debug.Log("Reached the end, sending metrics...");
+            googleMetricsSender.GetComponent<SendToGoogle>().Send();
+            Debug.Log("Metrics sent!");
         }
     }
 
