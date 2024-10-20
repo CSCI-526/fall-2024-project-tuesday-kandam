@@ -90,11 +90,15 @@ public class Player : MonoBehaviour
     private Vector3 originalScale; // Store original size for shrinking back
     private float radius;
     private Vector3 checkpointPosition; // Store the checkpoint position
-    private bool hasCheckpoint; 
+    private bool hasCheckpoint;
 
     // Metrics
     private Dictionary<PlayerSizeState, int> sizeStateCounts = new Dictionary<PlayerSizeState, int>();
     private Dictionary<Vector3, int> checkpointRespawnCounts = new Dictionary<Vector3, int>();
+    private Dictionary<PlayerSizeState, float> sizeStateTimeSpent = new Dictionary<PlayerSizeState, float>();
+    private float lastStateChangeTime; // To store the time of the last state change
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -106,9 +110,12 @@ public class Player : MonoBehaviour
         radius = circleCollider.radius;
 
         // Initialize the size state counts
-        sizeStateCounts[PlayerSizeState.STATE_SMALL] = 0;
-        sizeStateCounts[PlayerSizeState.STATE_MED] = 0;
-        sizeStateCounts[PlayerSizeState.STATE_LARGE] = 0;
+         // Initialize the size state time tracker
+        sizeStateTimeSpent[PlayerSizeState.STATE_SMALL] = 0f;
+        sizeStateTimeSpent[PlayerSizeState.STATE_MED] = 0f;
+        sizeStateTimeSpent[PlayerSizeState.STATE_LARGE] = 0f;
+
+        lastStateChangeTime = Time.time; // Record the start time
     }
 
     private void OnEnable()
@@ -164,7 +171,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-       HandleMovement();
+        HandleMovement();
     }
 
     private void SlopeCheck()
@@ -321,6 +328,11 @@ public class Player : MonoBehaviour
 
     private void ChangePlayerSizeState()
     {
+        // Before switching the state, calculate time spent in the current state
+        float currentStateTime = Time.time - lastStateChangeTime; // Time spent in the current state
+        sizeStateTimeSpent[_playerSizeState] += currentStateTime;
+
+        // Perform the state change
         if (_playerSizeState == PlayerSizeState.STATE_MED)
         {
             transform.localScale = originalScale;
@@ -352,14 +364,20 @@ public class Player : MonoBehaviour
             radius = circleCollider.radius * growScaleFactor;
         }
 
+        Debug.Log("Player size state: " + _playerSizeState);
+
+        // Reset last state change time to now
+        lastStateChangeTime = Time.time;
+
         // Update the size state count
-        sizeStateCounts[_playerSizeState]++;
+        Debug.Log("Player size state: " + _playerSizeState);
+
     }
 
     public void SetCheckpoint(Vector3 position)
     {
         checkpointPosition = position;
-        hasCheckpoint = true; 
+        hasCheckpoint = true;
     }
 
     public void Respawn()
@@ -399,26 +417,34 @@ public class Player : MonoBehaviour
         if (other.CompareTag("Diamond_Tag"))
         {
             Debug.Log("Collected a diamond!");
-            Destroy(other.gameObject); 
+            Destroy(other.gameObject);
         }
-        
+
         if (other.CompareTag("Spike_Tag"))
         {
             Debug.Log("Hit a spike! Respawning...");
-            Respawn(); 
+            Respawn();
         }
-        
+
         if (other.CompareTag("Checkpoint_Tag"))
         {
             Debug.Log("Checkpoint reached!");
-            SetCheckpoint(transform.position); 
+            SetCheckpoint(transform.position);
         }
-        
+
         if (other.CompareTag("End_Plate"))
         {
             endText.SetActive(true);
+            float finalStateTime = Time.time - lastStateChangeTime;
+            sizeStateTimeSpent[_playerSizeState] += finalStateTime;
             Debug.Log("Reached the end, sending metrics...");
-            googleMetricsSender.GetComponent<SendToGoogle>().Send();
+            string mostCommonSizeState = GetLongestState().ToString(); // Convert enum to string
+            string respawnCount1 = GetRespawnCount(new Vector3((float)42.03, (float)-5.75, 0)).ToString(); // Example position for checkpoint 1
+            string respawnCount2 = GetRespawnCount(new Vector3((float)0.51, (float)-5.18, 0)).ToString(); // Example position for checkpoint 2
+            Debug.Log("Most common size state: " + mostCommonSizeState);
+            Debug.Log("Respawn count for checkpoint 1: " + respawnCount1);
+            Debug.Log("Respawn count for checkpoint 2: " + respawnCount2);
+            googleMetricsSender.GetComponent<SendToGoogle>().Send(mostCommonSizeState, respawnCount1, respawnCount2);
             Debug.Log("Metrics sent!");
         }
     }
@@ -452,7 +478,7 @@ public class Player : MonoBehaviour
     // Get the most common size state
     public PlayerSizeState GetMostCommonSizeState()
     {
-        PlayerSizeState mostCommonState = PlayerSizeState.STATE_MED;
+        PlayerSizeState mostCommonState = PlayerSizeState.STATE_SMALL;
         int maxCount = 0;
         foreach (var state in sizeStateCounts)
         {
@@ -474,4 +500,22 @@ public class Player : MonoBehaviour
         }
         return 0;
     }
+
+    public PlayerSizeState GetLongestState()
+    {
+        PlayerSizeState longestState = PlayerSizeState.STATE_MED;
+        float maxTime = 0f;
+
+        foreach (var kvp in sizeStateTimeSpent)
+        {
+            if (kvp.Value > maxTime)
+            {
+                maxTime = kvp.Value;
+                longestState = kvp.Key;
+            }
+        }
+
+        return longestState;
+    }
+
 }

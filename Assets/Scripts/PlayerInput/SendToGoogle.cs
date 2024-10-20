@@ -15,13 +15,13 @@ public class SendToGoogle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
 
@@ -31,44 +31,39 @@ public class SendToGoogle : MonoBehaviour
         _sessionID = System.DateTime.Now.Ticks;
         // Send();
     }
-    
 
-    public void Send()
+
+    public void Send(string mostCommonSizeState, string respawnCount1, string respawnCount2)
     {
-        // Assign variables
-        _testInt = Random.Range(0, 101);
-        _testBool = true;
-        _testFloat = Random.Range(0.0f, 10.0f);
-
-        StartCoroutine(Post(_sessionID.ToString(), _testInt.ToString(), _testBool.ToString(), _testFloat.ToString()));
+        StartCoroutine(Post(_sessionID.ToString(), mostCommonSizeState, respawnCount1, respawnCount2));
     }
 
 
 
-private IEnumerator Post(string sessionID, string testInt, string testBool, string testFloat)
-{
-    // Create the form and enter responses
-    WWWForm form = new WWWForm();
-    form.AddField("entry.1289655618", sessionID);
-    form.AddField("entry.1889672031", testInt);
-    form.AddField("entry.976579775", testBool);
-    form.AddField("entry.693963586", testFloat);
-
-    // Send responses and verify result
-    using (UnityWebRequest www = UnityWebRequest.Post(URL, form))
+    private IEnumerator Post(string sessionID, string mostCommonSizeState, string respawnCount1, string respawnCount2)
     {
-        yield return www.SendWebRequest();
+        // Create the form and enter responses
+        WWWForm form = new WWWForm();
+        form.AddField("entry.1289655618", sessionID); // sessionID field
+        form.AddField("entry.1889672031", mostCommonSizeState); // most common size state
+        form.AddField("entry.976579775", respawnCount1); // respawn count for checkpoint 1
+        form.AddField("entry.693963586", respawnCount2); // respawn count for checkpoint 2
 
-        if (www.result != UnityWebRequest.Result.Success)
+        // Send responses and verify result
+        using (UnityWebRequest www = UnityWebRequest.Post(URL, form))
         {
-            Debug.Log(www.error);
-        }
-        else
-        {
-            Debug.Log("Form upload complete!");
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.Log(www.error);
+            }
+            else
+            {
+                Debug.Log("Form upload complete!");
+            }
         }
     }
-}
 
 
 }
