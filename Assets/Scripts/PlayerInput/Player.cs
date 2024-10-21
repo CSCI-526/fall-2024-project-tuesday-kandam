@@ -409,6 +409,15 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+
+        if (other.gameObject.CompareTag("Breakable_Brick"))
+        {
+
+            // Destroy the brick on collision
+            Destroy(other.gameObject);
+            Debug.Log("Brick destroyed!");
+        }
+
         // Check if the object has the tag 'mario_brick'
         if (other.gameObject.CompareTag("mario_brick"))
         {
