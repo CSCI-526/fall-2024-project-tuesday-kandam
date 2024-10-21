@@ -396,6 +396,13 @@ public class Player : MonoBehaviour
         {
             transform.position = new Vector3(-14, 0, 0);
         }
+
+        // Reset the Rigidbody2D velocity to stop the player's movement.
+        if (body != null)
+        {
+            body.velocity = Vector2.zero;
+            body.angularVelocity = 0f;
+        }
     }
 
     private void OnDrawGizmos()
@@ -451,13 +458,33 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        // Check if the object has the tag 'mario_brick'
         if (other.gameObject.CompareTag("mario_brick"))
         {
-            brick++; // Increment the counter
+            brick++;  // Increment the counter
 
-            // Make the special object visible only after 4 collisions
-            if (brick >= 4)
+            // Get the SpriteRenderer component of the brick
+            SpriteRenderer brickRenderer = other.gameObject.GetComponent<SpriteRenderer>();
+
+            if (brick == 1)
             {
+                // Change the color of the brick to the specified hex color
+                if (brickRenderer != null)
+                {
+                    Color newColor;
+                    if (ColorUtility.TryParseHtmlString("#9D4649", out newColor))
+                    {
+                        brickRenderer.color = newColor;  // Change to the specified hex color
+                        Debug.Log("Brick color changed to #9D4649!");
+                    }
+                }
+            }
+            else if (brick >= 2)
+            {
+                // Destroy the brick after the second collision
+                Destroy(other.gameObject);
+                Debug.Log("Brick destroyed!");
+
                 HEXKey.SetActive(true); // Make the object visible
                 Debug.Log("Special object is now visible!");
             }
