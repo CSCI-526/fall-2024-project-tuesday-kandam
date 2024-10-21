@@ -13,7 +13,8 @@ public class Checkpoint : MonoBehaviour
         {
             isActivated = true;
             ChangeColorOfChildren();
-            FindObjectOfType<Player>().SetCheckpoint(transform.position);
+            Debug.Log("Checkpoint activated");
+            FindObjectOfType<Player>().SetCheckpoint(transform.position, "");
         }
     }
 
