@@ -351,11 +351,18 @@ public class Player : MonoBehaviour
     {
         if (hasCheckpoint)
         {
-            transform.position = checkpointPosition; 
+            transform.position = checkpointPosition;
         }
         else
         {
-            transform.position = new Vector3(-14, 0, 0); 
+            transform.position = new Vector3(-14, 0, 0);
+        }
+
+        // Reset the Rigidbody2D velocity to stop the player's movement.
+        if (body != null)
+        {
+            body.velocity = Vector2.zero;
+            body.angularVelocity = 0f;
         }
     }
 
