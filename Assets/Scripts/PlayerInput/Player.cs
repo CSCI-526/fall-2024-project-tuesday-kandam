@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -85,20 +87,23 @@ public class Player : MonoBehaviour
     public GroundState _groundState;
     public GroundState _prevState;
     private PlayerSizeState _playerSizeState;
+
+    private PlayerSizeState _prevSizeState;
     private PlayerMoveState _playerMoveState;
 
     private Vector3 originalScale; // Store original size for shrinking back
     private float radius;
-    private Vector3 checkpointPosition; // Store the checkpoint position
+    private Vector3 lastCheckpointPosition; // Store the checkpoint position
+    private string lastCheckpointName; // Store the checkpoint name
     private bool hasCheckpoint;
 
     // Metrics
     private Dictionary<PlayerSizeState, int> sizeStateCounts = new Dictionary<PlayerSizeState, int>();
-    private Dictionary<Vector3, int> checkpointRespawnCounts = new Dictionary<Vector3, int>();
+    private Dictionary<String, int> checkpointRespawnCounts = new Dictionary<String, int>();
     private Dictionary<PlayerSizeState, float> sizeStateTimeSpent = new Dictionary<PlayerSizeState, float>();
     private float lastStateChangeTime; // To store the time of the last state change
 
-    
+
 
     // Start is called before the first frame update
     void Start()
@@ -110,7 +115,7 @@ public class Player : MonoBehaviour
         radius = circleCollider.radius;
 
         // Initialize the size state counts
-         // Initialize the size state time tracker
+        // Initialize the size state time tracker
         sizeStateTimeSpent[PlayerSizeState.STATE_SMALL] = 0f;
         sizeStateTimeSpent[PlayerSizeState.STATE_MED] = 0f;
         sizeStateTimeSpent[PlayerSizeState.STATE_LARGE] = 0f;
@@ -300,10 +305,12 @@ public class Player : MonoBehaviour
         {
             if (_playerSizeState == PlayerSizeState.STATE_MED)
             {
+                _prevSizeState = _playerSizeState;
                 _playerSizeState = PlayerSizeState.STATE_LARGE;
             }
             else
             {
+                _prevSizeState = _playerSizeState;
                 _playerSizeState = PlayerSizeState.STATE_MED;
             }
             ChangePlayerSizeState();
@@ -316,10 +323,12 @@ public class Player : MonoBehaviour
         {
             if (_playerSizeState == PlayerSizeState.STATE_MED)
             {
+                _prevSizeState = _playerSizeState;
                 _playerSizeState = PlayerSizeState.STATE_SMALL;
             }
             else
             {
+                _prevSizeState = _playerSizeState;
                 _playerSizeState = PlayerSizeState.STATE_MED;
             }
             ChangePlayerSizeState();
@@ -329,8 +338,11 @@ public class Player : MonoBehaviour
     private void ChangePlayerSizeState()
     {
         // Before switching the state, calculate time spent in the current state
+        Debug.Log("Time spent in the current state: " + (Time.time - lastStateChangeTime));
+        Debug.Log("Current state before switching: " + _playerSizeState);
+        Debug.Log("Prev state before switching: " + _prevSizeState);
         float currentStateTime = Time.time - lastStateChangeTime; // Time spent in the current state
-        sizeStateTimeSpent[_playerSizeState] += currentStateTime;
+        sizeStateTimeSpent[_prevSizeState] += currentStateTime;
 
         // Perform the state change
         if (_playerSizeState == PlayerSizeState.STATE_MED)
@@ -364,8 +376,6 @@ public class Player : MonoBehaviour
             radius = circleCollider.radius * growScaleFactor;
         }
 
-        Debug.Log("Player size state: " + _playerSizeState);
-
         // Reset last state change time to now
         lastStateChangeTime = Time.time;
 
@@ -374,23 +384,27 @@ public class Player : MonoBehaviour
 
     }
 
-    public void SetCheckpoint(Vector3 position)
+    public void SetCheckpoint(Vector3 position, string checkpointName)
     {
-        checkpointPosition = position;
+        lastCheckpointPosition = position;
         hasCheckpoint = true;
+        lastCheckpointName = checkpointName;
     }
 
     public void Respawn()
     {
         if (hasCheckpoint)
         {
-            transform.position = checkpointPosition;
+            transform.position = lastCheckpointPosition;
             // Update the respawn count for the current checkpoint 
-            if (!checkpointRespawnCounts.ContainsKey(checkpointPosition))
+            if (!checkpointRespawnCounts.ContainsKey(lastCheckpointName))
             {
-                checkpointRespawnCounts[checkpointPosition] = 0;
+                // if the checkpoint position does not exist in the dictionary, add it
+                Debug.Log("Checkpoint position added to the dictionary. Position: " + lastCheckpointPosition + " Name: " + lastCheckpointName);
+                checkpointRespawnCounts[lastCheckpointName] = 1;
             }
-            checkpointRespawnCounts[checkpointPosition]++;
+            Debug.Log("Respawn count for checkpoint " + lastCheckpointPosition + ": " + checkpointRespawnCounts[lastCheckpointName]);
+            checkpointRespawnCounts[lastCheckpointName]++;
         }
         else
         {
@@ -436,22 +450,50 @@ public class Player : MonoBehaviour
         if (other.CompareTag("Checkpoint_Tag"))
         {
             Debug.Log("Checkpoint reached!");
-            SetCheckpoint(transform.position);
+            Debug.Log("Checkpoint position added to the dictionary. Position: " + other.transform.position + " Name: " + other.GameObject().name);
+            SetCheckpoint(other.transform.position, other.GameObject().name);
+
         }
 
         if (other.CompareTag("End_Plate"))
         {
             endText.SetActive(true);
             float finalStateTime = Time.time - lastStateChangeTime;
+            Debug.Log("Time spent in the final state: " + finalStateTime);
+            Debug.Log("Final state: " + _playerSizeState);
             sizeStateTimeSpent[_playerSizeState] += finalStateTime;
             Debug.Log("Reached the end, sending metrics...");
             string mostCommonSizeState = GetLongestState().ToString(); // Convert enum to string
-            string respawnCount1 = GetRespawnCount(new Vector3((float)42.03, (float)-5.75, 0)).ToString(); // Example position for checkpoint 1
-            string respawnCount2 = GetRespawnCount(new Vector3((float)0.51, (float)-5.18, 0)).ToString(); // Example position for checkpoint 2
+            // Checkpoint position added to the dictionary. Position: (-9.44, 16.89, 0.00)
+            // Checkpoint position added to the dictionary. Position: (-2.14, 1.36, 0.00)
+            // Checkpoint position added to the dictionary. Position: (25.45, 11.03, 0.00)
+            // Checkpoint position added to the dictionary. Position: (51.34, 10.90, 0.00)
+            // Checkpoint position added to the dictionary. Position: (9.17, -6.06, 0.00)
+
+
+
+            // print key and value
+            foreach (var kvp in checkpointRespawnCounts)
+            {
+                Debug.Log("Checkpoint: " + kvp.Key + " Respawn count: " + kvp.Value);
+            }
+            string checkpoint1 = "Checkpoint 1";
+            string checkpoint2 = "Checkpoint 2";
+            string checkpoint3 = "Checkpoint 3";
+            string checkpoint4 = "Checkpoint 4";
+            string checkpoint5 = "Checkpoint 5";
+            string respawnCount1 = GetRespawnCount(checkpoint1).ToString(); // Example position for checkpoint 1
+            string respawnCount2 = GetRespawnCount(checkpoint2).ToString(); // Example position for checkpoint 1
+            string respawnCount3 = GetRespawnCount(checkpoint3).ToString(); // Example position for checkpoint 2
+            string respawnCount4 = GetRespawnCount(checkpoint4).ToString(); // Example position for checkpoint 1
+            string respawnCount5 = GetRespawnCount(checkpoint5).ToString(); // Example position for checkpoint 2
             Debug.Log("Most common size state: " + mostCommonSizeState);
             Debug.Log("Respawn count for checkpoint 1: " + respawnCount1);
             Debug.Log("Respawn count for checkpoint 2: " + respawnCount2);
-            googleMetricsSender.GetComponent<SendToGoogle>().Send(mostCommonSizeState, respawnCount1, respawnCount2);
+            Debug.Log("Respawn count for checkpoint 3: " + respawnCount3);
+            Debug.Log("Respawn count for checkpoint 4: " + respawnCount4);
+            Debug.Log("Respawn count for checkpoint 5: " + respawnCount5);
+            googleMetricsSender.GetComponent<SendToGoogle>().Send(mostCommonSizeState, respawnCount1, respawnCount2, respawnCount3, respawnCount4, respawnCount5);
             Debug.Log("Metrics sent!");
         }
     }
@@ -472,7 +514,7 @@ public class Player : MonoBehaviour
                 if (brickRenderer != null)
                 {
                     Color newColor;
-                    if (ColorUtility.TryParseHtmlString("#9D4649", out newColor))
+                    if (UnityEngine.ColorUtility.TryParseHtmlString("#9D4649", out newColor))
                     {
                         brickRenderer.color = newColor;  // Change to the specified hex color
                         Debug.Log("Brick color changed to #9D4649!");
@@ -519,22 +561,24 @@ public class Player : MonoBehaviour
     }
 
     // Get respawn count for a specific checkpoint
-    public int GetRespawnCount(Vector3 checkpointPosition)
+    public int GetRespawnCount(string lastCheckpointPosition)
     {
-        if (checkpointRespawnCounts.ContainsKey(checkpointPosition))
+        if (checkpointRespawnCounts.ContainsKey(lastCheckpointPosition))
         {
-            return checkpointRespawnCounts[checkpointPosition];
+            return checkpointRespawnCounts[lastCheckpointPosition];
         }
         return 0;
     }
 
     public PlayerSizeState GetLongestState()
     {
-        PlayerSizeState longestState = PlayerSizeState.STATE_MED;
+        PlayerSizeState longestState = PlayerSizeState.STATE_SMALL;
         float maxTime = 0f;
 
         foreach (var kvp in sizeStateTimeSpent)
         {
+            // print the key and value
+            Debug.Log("Key: " + kvp.Key + " Value: " + kvp.Value);
             if (kvp.Value > maxTime)
             {
                 maxTime = kvp.Value;
