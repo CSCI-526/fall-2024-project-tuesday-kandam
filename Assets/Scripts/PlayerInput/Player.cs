@@ -112,7 +112,7 @@ public class Player : MonoBehaviour
     private Dictionary<PlayerSizeState, float> sizeStateTimeSpent = new Dictionary<PlayerSizeState, float>();
     private float lastStateChangeTime; // To store the time of the last state change
 
-
+    public Vector3 respawnStartingPos = new Vector3(-14,0,0);
 
     // Start is called before the first frame update
     void Start()
@@ -423,7 +423,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            transform.position = new Vector3(-14, 0, 0);
+            transform.position = respawnStartingPos;
         }
 
         // Reset the Rigidbody2D velocity to stop the player's movement.
