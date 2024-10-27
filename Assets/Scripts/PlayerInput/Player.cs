@@ -103,6 +103,7 @@ public class Player : MonoBehaviour
     private Vector3 originalScale; // Store original size for shrinking back
     private float radius;
     private Vector3 lastCheckpointPosition; // Store the checkpoint position
+    public Vector3 respawnOriginalPos =new Vector3(-14, 0, 0); // Store the checkpoint position
     private string lastCheckpointName; // Store the checkpoint name
     private bool hasCheckpoint;
 
@@ -112,7 +113,12 @@ public class Player : MonoBehaviour
     private Dictionary<PlayerSizeState, float> sizeStateTimeSpent = new Dictionary<PlayerSizeState, float>();
     private float lastStateChangeTime; // To store the time of the last state change
 
-
+    //variables for hinge reset
+    // float resetDelay = 2.0f; // delay in seconds
+    // float timer = 0f;
+    // bool isInteracting = fa/lse;
+    // float originalAngle;
+    // public HingeJoint2D hingeJoint;
 
     // Start is called before the first frame update
     void Start()
@@ -128,6 +134,9 @@ public class Player : MonoBehaviour
         sizeStateTimeSpent[PlayerSizeState.STATE_LARGE] = 0f;
 
         lastStateChangeTime = Time.time; // Record the start time
+
+        // hingeJoint = GetComponent<HingeJoint2D>();
+        // originalAngle = hingeJoint.jointAngle;  
     }
 
     private void OnEnable()
@@ -192,6 +201,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         HandleMovement();
+
     }
 
     private void SlopeCheck()
@@ -423,7 +433,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            transform.position = new Vector3(-14, 0, 0);
+            transform.position = respawnOriginalPos;
         }
 
         // Reset the Rigidbody2D velocity to stop the player's movement.
