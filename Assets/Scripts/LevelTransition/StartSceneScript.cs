@@ -3,16 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenuScript : MonoBehaviour
+public class StartSceneScript : MonoBehaviour
 {
     public void OnPlayButton()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("LevelSelectionScene");
     }
-
-    public void OnQuitButton()
-    {
-        Application.Quit();
-    }
-
 }
