@@ -26,15 +26,40 @@ public class Player : MonoBehaviour
     private bool isJumping;
     private bool isGrounded;
 
+    private float moveSpeed, jumpHeight;
+    private float baseGravity = 3f;
+    private float maxFallSpeed = 18f;
+    private float fallSpeedMultiplier = 4f;
+    private float playerMass = 10f;
+
     [Header("Player Base Values")]
     [SerializeField]
-    private float moveSpeed, jumpHeight;
-    public float baseGravity = 2f;
-    public float maxFallSpeed = 18f;
-    public float fallSpeedMultiplier = 4f;
-    public float playerMass = 10f;
-    public float fallSpeedFactor = 1.2f;
-    public float jumpHeightFactor = 3f;
+    public float MmoveSpeed = 10f;
+    public float MjumpHeight = 15;
+    public float MmaxFallSpeed = 25f;
+    public float MfallSpeedMultiplier = 1f;
+    public float MplayerMass = 10f;
+
+
+    [Header("Player Large Values")]
+    [SerializeField]
+    public float LmoveSpeed = 6f;
+    public float LmaxFallSpeed = 12f;
+    public float LfallSpeedMultiplier = 0.5f;
+    public float LplayerMass = 0f;
+    public float LfallSpeedFactor = 1.2f;
+    public float LjumpHeight = 7f;
+
+
+    [Header("Player Small Values")]
+    [SerializeField]
+    public float SmoveSpeed = 15f;
+    public float SmaxFallSpeed = 35f;
+    public float SfallSpeedMultiplier = 4f;
+    public float SplayerMass = 30f;
+    public float SjumpHeight = 5f;
+
+
 
     [Header("Player Ground Check Var")]
     Vector2 movementInput;
@@ -46,22 +71,6 @@ public class Player : MonoBehaviour
     public float growScaleFactor = 1.5f;
     public float shrinkScaleFactor = 0.5f;
 
-    [Header("Cont Ball Size Change Var")]
-    public Vector3 maxSize;
-    public Vector3 minSize;
-    public float maxSpeed;
-    public float minSpeed;
-    public float maxMass;
-    public float minMass;
-    public float maxJump;
-    public float minJump;
-    public float maxFSpeed;
-    public float minFSpeed;
-    public float maxfSpeedMult;
-    public float minfSpeedMult;
-    private float t = 0.5f;
-    private bool growing = false;
-    private bool shrinking = false;
 
     public enum GroundState
     {
@@ -97,8 +106,6 @@ public class Player : MonoBehaviour
     {
         _playerSizeState = PlayerSizeState.STATE_MED;
         originalScale = transform.localScale; // Save the ball's original size
-        minSize = originalScale * shrinkScaleFactor;
-        maxSize = originalScale * growScaleFactor;
         radius = circleCollider.radius;
     }
 
@@ -139,18 +146,24 @@ public class Player : MonoBehaviour
 
     private void HandleMovement()
     {
-        
-        if (isGrounded && !isOnSlope && !isJumping)
+        if(isGrounded)
         {
-            body.velocity = new Vector2(movementInput.x * moveSpeed, body.velocity.y);
+            if(_playerSizeState == PlayerSizeState.STATE_LARGE)
+            {
+                ShrinkBall();
+            }
+            if (!isOnSlope && !isJumping)
+            {
+                body.velocity = new Vector2(movementInput.x * moveSpeed, body.velocity.y);
+            }
+            else if (isOnSlope && !isJumping)
+            {
+                body.velocity = new Vector2(-movementInput.x * slopeNormalPerp.x * moveSpeed, -movementInput.x * slopeNormalPerp.y * moveSpeed);
+            }
         }
-        else if (isGrounded && isOnSlope && !isJumping)
+        else
         {
-            body.velocity = new Vector2(-movementInput.x * slopeNormalPerp.x * moveSpeed, -movementInput.x * slopeNormalPerp.y * moveSpeed);
-        }
-        else if (!isGrounded)
-        {
-            body.velocity = new Vector2(movementInput.x * moveSpeed, body.velocity.y);
+            body.velocity = new Vector2(movementInput.x * moveSpeed * 0.7f, body.velocity.y);
         }
     }
     private void Update()
@@ -312,31 +325,31 @@ public class Player : MonoBehaviour
         if (_playerSizeState == PlayerSizeState.STATE_MED)
         {
             transform.localScale = originalScale;
-            jumpHeight = 5;
-            fallSpeedMultiplier = 1;
-            moveSpeed = 10;
-            playerMass = 10f;
-            maxFallSpeed = 25;
+            jumpHeight = MjumpHeight;
+            fallSpeedMultiplier = MfallSpeedMultiplier;
+            moveSpeed = MmoveSpeed;
+            playerMass = MplayerMass;
+            maxFallSpeed = MmaxFallSpeed;
             radius = circleCollider.radius;
         }
         else if (_playerSizeState == PlayerSizeState.STATE_SMALL)
         {
             transform.localScale = originalScale * shrinkScaleFactor;
-            jumpHeight = 5;
-            fallSpeedMultiplier = 2.5f;
-            moveSpeed = 15;
-            playerMass = 30f;
-            maxFallSpeed = 35;
+            jumpHeight = SjumpHeight;
+            fallSpeedMultiplier = SfallSpeedMultiplier;
+            moveSpeed = SmoveSpeed;
+            playerMass = SplayerMass;
+            maxFallSpeed = SmaxFallSpeed;
             radius = circleCollider.radius * shrinkScaleFactor;
         }
-        else if (_playerSizeState == PlayerSizeState.STATE_LARGE)
+        else if (_playerSizeState == PlayerSizeState.STATE_LARGE && !isGrounded)
         {
             transform.localScale = originalScale * growScaleFactor;
-            jumpHeight = 14;
-            fallSpeedMultiplier = 0.1f;
-            moveSpeed = 6;
-            playerMass = 0f;
-            maxFallSpeed = 8f;
+            jumpHeight = LjumpHeight;
+            fallSpeedMultiplier = LfallSpeedMultiplier;
+            moveSpeed = LmoveSpeed;
+            playerMass = LplayerMass;
+            maxFallSpeed = LmaxFallSpeed;
             radius = circleCollider.radius * growScaleFactor;
         }
     }

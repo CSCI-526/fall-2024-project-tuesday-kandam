@@ -13,6 +13,7 @@ public class SpringPlatform : MonoBehaviour
     public bool isTouching = false;
     // Might be used for timing mechanic
     private int powerIndex = 1;
+    private float t = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,7 @@ public class SpringPlatform : MonoBehaviour
             {
                 isHeavy = false;
             }
+            isTouching = true;
         }
     }
 
@@ -51,18 +53,24 @@ public class SpringPlatform : MonoBehaviour
     private void FixedUpdate()
     {
         // When force is not 0
-        if (force != 0)
+        if (force != 0 )
         {
-
             springJoint.distance = 1.5f;
             rb.AddForce(Vector3.up * force);
             force = 0;
+            t = 0;
         }
 
         // When the plunger is held down
         if (isHeavy)
         {
-            springJoint.distance = 1f;
+            t += 0.5f * Time.deltaTime;
+            Debug.Log("On platform with time t:" + t);
+            if(t > 1.0f)
+            {
+                t = 1.0f;
+            }
+            springJoint.distance = Mathf.Lerp(1.5f, 1.0f, t);
             rb.AddForce(Vector3.down * 200);
         }
     }
