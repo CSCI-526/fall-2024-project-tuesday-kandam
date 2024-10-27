@@ -12,6 +12,7 @@ TagManager:
   - mario_brick
   - Hex_Key_Tag
   - Hex_Key_Plate
+  - Breakable_Brick
   layers:
   - Default
   - TransparentFX

@@ -65,7 +65,6 @@ public class SpringPlatform : MonoBehaviour
         if (isHeavy)
         {
             t += 0.5f * Time.deltaTime;
-            Debug.Log("On platform with time t:" + t);
             if(t > 1.0f)
             {
                 t = 1.0f;

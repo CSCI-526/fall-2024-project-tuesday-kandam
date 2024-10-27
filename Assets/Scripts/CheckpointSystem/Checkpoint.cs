@@ -12,8 +12,18 @@ public class Checkpoint : MonoBehaviour
         if (collision.CompareTag("Player") && !isActivated)
         {
             isActivated = true;
-            GetComponent<SpriteRenderer>().color = activatedColor;
-            FindObjectOfType<Player>().SetCheckpoint(transform.position);
+            ChangeColorOfChildren();
+            Debug.Log("Checkpoint activated");
+            FindObjectOfType<Player>().SetCheckpoint(transform.position, "");
+        }
+    }
+
+    private void ChangeColorOfChildren()
+    {
+        SpriteRenderer[] spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        foreach (SpriteRenderer spriteRenderer in spriteRenderers)
+        {
+            spriteRenderer.color = activatedColor;
         }
     }
 }
