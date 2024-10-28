@@ -44,7 +44,7 @@
             ],
             "bindings": [
                 {
-                    "name": "Arrow Keys",
+                    "name": "Directions",
                     "id": "64129eb9-7e4a-44aa-ab6c-3a83de48ac3d",
                     "path": "2DVector",
                     "interactions": "",
