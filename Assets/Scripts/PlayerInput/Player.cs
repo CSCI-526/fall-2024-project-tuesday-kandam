@@ -135,6 +135,9 @@ public class Player : MonoBehaviour
 
         lastStateChangeTime = Time.time; // Record the start time
 
+        moveSpeed = MmoveSpeed;
+        jumpHeight = MjumpHeight;
+
         // hingeJoint = GetComponent<HingeJoint2D>();
         // originalAngle = hingeJoint.jointAngle;  
     }
