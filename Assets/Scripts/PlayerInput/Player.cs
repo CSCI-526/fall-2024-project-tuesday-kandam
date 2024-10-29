@@ -112,6 +112,9 @@ public class Player : MonoBehaviour
     private Dictionary<String, int> checkpointRespawnCounts = new Dictionary<String, int>();
     private Dictionary<PlayerSizeState, float> sizeStateTimeSpent = new Dictionary<PlayerSizeState, float>();
     private float lastStateChangeTime; // To store the time of the last state change
+    private Dictionary<Vector2, int> positionCounts = new Dictionary<Vector2, int>();
+    private float recordInterval = 0.5f; // Record every 0.5 seconds
+    private float timer = 0f;
 
     //variables for hinge reset
     // float resetDelay = 2.0f; // delay in seconds
@@ -204,6 +207,20 @@ public class Player : MonoBehaviour
     private void Update()
     {
         HandleMovement();
+        timer += Time.deltaTime;
+        if (timer >= recordInterval)
+        {
+            Vector2 position = new Vector2(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y));
+            if (positionCounts.ContainsKey(position))
+            {
+                positionCounts[position]++;
+            }
+            else
+            {
+                positionCounts[position] = 1;
+            }
+            timer = 0f;
+        }
 
     }
 
@@ -521,7 +538,8 @@ public class Player : MonoBehaviour
             Debug.Log("Respawn count for checkpoint 3: " + respawnCount3);
             Debug.Log("Respawn count for checkpoint 4: " + respawnCount4);
             Debug.Log("Respawn count for checkpoint 5: " + respawnCount5);
-            googleMetricsSender.GetComponent<SendToGoogle>().Send(mostCommonSizeState, respawnCount1, respawnCount2, respawnCount3, respawnCount4, respawnCount5);
+            Debug.Log("Heatmap Coordinates: " + GetSerializedData());
+            googleMetricsSender.GetComponent<SendToGoogle>().Send(mostCommonSizeState, respawnCount1, respawnCount2, respawnCount3, respawnCount4, respawnCount5, GetSerializedData());
             Debug.Log("Metrics sent!");
         }
     }
@@ -625,5 +643,25 @@ public class Player : MonoBehaviour
 
         return longestState;
     }
+    public string GetSerializedData()
+    {
+        return JsonUtility.ToJson(new SerializableDictionary(positionCounts));
+    }
 
+}
+
+[System.Serializable]
+public class SerializableDictionary
+{
+    public List<Vector2> keys = new List<Vector2>();
+    public List<int> values = new List<int>();
+
+    public SerializableDictionary(Dictionary<Vector2, int> dictionary)
+    {
+        foreach (var kvp in dictionary)
+        {
+            keys.Add(kvp.Key);
+            values.Add(kvp.Value);
+        }
+    }
 }
