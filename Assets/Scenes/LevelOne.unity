@@ -4745,20 +4745,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '- Left Arrow: Move Left
+  m_text: '- WASD - Move/Jump
 
+    - J - Shrink Ball
 
-    - Right Arrow: Move Right
-
-
-    - Up Arrow:
-    Jump
-
-
-    - Q: Shrink Ball
-
-
-    - Space Bar: Expand Ball'
+    - K - Expand Ball (In Air
+    ONLY)'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
