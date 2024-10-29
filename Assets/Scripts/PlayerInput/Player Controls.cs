@@ -66,7 +66,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             ],
             ""bindings"": [
                 {
-                    ""name"": ""Directions"",
+                    ""name"": ""Arrow Keys"",
                     ""id"": ""64129eb9-7e4a-44aa-ab6c-3a83de48ac3d"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
