@@ -64,7 +64,7 @@ public class SpringPlatform : MonoBehaviour
         // When the plunger is held down
         if (isHeavy)
         {
-            t += 0.5f * Time.deltaTime;
+            t += Time.deltaTime;
             if(t > 1.0f)
             {
                 t = 1.0f;
