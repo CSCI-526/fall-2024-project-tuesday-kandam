@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+
 
 public class Player : MonoBehaviour
 {
@@ -503,6 +505,7 @@ public class Player : MonoBehaviour
         if (other.CompareTag("End_Plate"))
         {
             endText.SetActive(true);
+
             float finalStateTime = Time.time - lastStateChangeTime;
             Debug.Log("Time spent in the final state: " + finalStateTime);
             Debug.Log("Final state: " + _playerSizeState);
@@ -541,6 +544,18 @@ public class Player : MonoBehaviour
             Debug.Log("Heatmap Coordinates: " + GetSerializedData());
             googleMetricsSender.GetComponent<SendToGoogle>().Send(mostCommonSizeState, respawnCount1, respawnCount2, respawnCount3, respawnCount4, respawnCount5, GetSerializedData());
             Debug.Log("Metrics sent!");
+
+            StartCoroutine(LoadSceneAfterDelay());
+
+            IEnumerator LoadSceneAfterDelay()
+            {
+                // Wait for 5 seconds
+                yield return new WaitForSeconds(5f);
+
+                // Load the scene
+                SceneManager.LoadScene("LevelSelectionScene");
+            }
+
         }
     }
 
