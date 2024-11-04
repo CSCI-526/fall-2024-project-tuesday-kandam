@@ -6478,6 +6478,7 @@ GameObject:
   - component: {fileID: 340989071}
   - component: {fileID: 340989070}
   - component: {fileID: 340989069}
+  - component: {fileID: 340989074}
   m_Layer: 7
   m_Name: Seesaw - Left (6)
   m_TagString: Untagged
@@ -6508,8 +6509,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: 30
-    m_UpperAngle: -30
+    m_LowerAngle: 90
+    m_UpperAngle: -90
 --- !u!61 &340989070
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6649,6 +6650,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1621496937}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &340989074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340989068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911261174178b674a866758f0992ed67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &380673338
 GameObject:
   m_ObjectHideFlags: 0
@@ -8247,6 +8260,7 @@ GameObject:
   - component: {fileID: 491328681}
   - component: {fileID: 491328680}
   - component: {fileID: 491328679}
+  - component: {fileID: 491328684}
   m_Layer: 7
   m_Name: Seesaw - Right (1)
   m_TagString: Untagged
@@ -8277,8 +8291,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: 20
-    m_UpperAngle: -20
+    m_LowerAngle: 90
+    m_UpperAngle: -90
 --- !u!61 &491328680
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8418,6 +8432,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1621496937}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &491328684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 491328678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911261174178b674a866758f0992ed67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &493810246
 GameObject:
   m_ObjectHideFlags: 0
@@ -9576,6 +9602,7 @@ GameObject:
   - component: {fileID: 550881574}
   - component: {fileID: 550881573}
   - component: {fileID: 550881572}
+  - component: {fileID: 550881577}
   m_Layer: 7
   m_Name: Seesaw - Left (8)
   m_TagString: Untagged
@@ -9606,8 +9633,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: 30
-    m_UpperAngle: -30
+    m_LowerAngle: 90
+    m_UpperAngle: -90
 --- !u!61 &550881573
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9747,6 +9774,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1621496937}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &550881577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550881571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911261174178b674a866758f0992ed67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &551528055
 GameObject:
   m_ObjectHideFlags: 0
@@ -11744,6 +11783,7 @@ GameObject:
   - component: {fileID: 695633369}
   - component: {fileID: 695633368}
   - component: {fileID: 695633367}
+  - component: {fileID: 695633372}
   m_Layer: 7
   m_Name: Seesaw - Left (3)
   m_TagString: Untagged
@@ -11774,8 +11814,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: 30
-    m_UpperAngle: -30
+    m_LowerAngle: 90
+    m_UpperAngle: -90
 --- !u!61 &695633368
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11915,6 +11955,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1621496937}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &695633372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 695633366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911261174178b674a866758f0992ed67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &708392579
 GameObject:
   m_ObjectHideFlags: 0
@@ -12731,6 +12783,7 @@ GameObject:
   - component: {fileID: 742007477}
   - component: {fileID: 742007476}
   - component: {fileID: 742007475}
+  - component: {fileID: 742007480}
   m_Layer: 7
   m_Name: Seesaw - Left (9)
   m_TagString: Untagged
@@ -12761,8 +12814,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: 30
-    m_UpperAngle: -30
+    m_LowerAngle: 90
+    m_UpperAngle: -90
 --- !u!61 &742007476
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12902,6 +12955,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1621496937}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &742007480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742007474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911261174178b674a866758f0992ed67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &744116537
 GameObject:
   m_ObjectHideFlags: 0
@@ -12999,6 +13064,7 @@ GameObject:
   - component: {fileID: 745724630}
   - component: {fileID: 745724629}
   - component: {fileID: 745724628}
+  - component: {fileID: 745724633}
   m_Layer: 7
   m_Name: Seesaw - Left
   m_TagString: Untagged
@@ -13029,8 +13095,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 1000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: 20
-    m_UpperAngle: -20
+    m_LowerAngle: 90
+    m_UpperAngle: -90
 --- !u!61 &745724629
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13170,6 +13236,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1621496937}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &745724633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745724627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911261174178b674a866758f0992ed67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &751664241
 GameObject:
   m_ObjectHideFlags: 0
@@ -18414,7 +18492,7 @@ Transform:
   m_GameObject: {fileID: 1022319964}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.7, y: 4.5, z: 0}
+  m_LocalPosition: {x: 22.7, y: 23.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -18585,6 +18663,7 @@ MonoBehaviour:
     m_Bits: 128
   growScaleFactor: 1.25
   shrinkScaleFactor: 0.5
+  maxSizeFloatForce: 35
   _groundState: 0
   _prevState: 0
   respawnOriginalPos: {x: -18, y: 46, z: 0}
@@ -25962,6 +26041,7 @@ GameObject:
   - component: {fileID: 1470591611}
   - component: {fileID: 1470591610}
   - component: {fileID: 1470591609}
+  - component: {fileID: 1470591614}
   m_Layer: 7
   m_Name: Seesaw - Left (10)
   m_TagString: Untagged
@@ -25992,8 +26072,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: 30
-    m_UpperAngle: -30
+    m_LowerAngle: 90
+    m_UpperAngle: -90
 --- !u!61 &1470591610
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -26133,6 +26213,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1621496937}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1470591614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470591608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911261174178b674a866758f0992ed67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1473356821
 GameObject:
   m_ObjectHideFlags: 0
@@ -26705,8 +26797,8 @@ Transform:
   m_GameObject: {fileID: 1501608427}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 121.9, y: 35, z: 0.1016851}
-  m_LocalScale: {x: 57.313465, y: 4.7672734, z: 1}
+  m_LocalPosition: {x: 122.4, y: 33.3, z: 0.1016851}
+  m_LocalScale: {x: 57.313465, y: 7.293928, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1395965288}
@@ -30379,6 +30471,7 @@ GameObject:
   - component: {fileID: 1737743303}
   - component: {fileID: 1737743302}
   - component: {fileID: 1737743301}
+  - component: {fileID: 1737743306}
   m_Layer: 7
   m_Name: Seesaw - Left (4)
   m_TagString: Untagged
@@ -30409,8 +30502,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: 30
-    m_UpperAngle: -30
+    m_LowerAngle: 90
+    m_UpperAngle: -90
 --- !u!61 &1737743302
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -30550,6 +30643,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1621496937}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1737743306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737743300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911261174178b674a866758f0992ed67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1750948496
 GameObject:
   m_ObjectHideFlags: 0
@@ -31344,6 +31449,7 @@ GameObject:
   - component: {fileID: 1770097417}
   - component: {fileID: 1770097416}
   - component: {fileID: 1770097415}
+  - component: {fileID: 1770097420}
   m_Layer: 7
   m_Name: Seesaw - Left (5)
   m_TagString: Untagged
@@ -31374,8 +31480,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: 30
-    m_UpperAngle: -30
+    m_LowerAngle: 90
+    m_UpperAngle: -90
 --- !u!61 &1770097416
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -31515,6 +31621,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1621496937}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1770097420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770097414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911261174178b674a866758f0992ed67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1770494348
 GameObject:
   m_ObjectHideFlags: 0
@@ -32180,6 +32298,7 @@ GameObject:
   - component: {fileID: 1810497875}
   - component: {fileID: 1810497874}
   - component: {fileID: 1810497873}
+  - component: {fileID: 1810497878}
   m_Layer: 7
   m_Name: Seesaw - Left (2)
   m_TagString: Untagged
@@ -32210,8 +32329,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: 30
-    m_UpperAngle: -30
+    m_LowerAngle: 90
+    m_UpperAngle: -90
 --- !u!61 &1810497874
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -32351,6 +32470,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1621496937}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1810497878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810497872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911261174178b674a866758f0992ed67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1813401008
 GameObject:
   m_ObjectHideFlags: 0
@@ -36328,6 +36459,7 @@ GameObject:
   - component: {fileID: 2022411610}
   - component: {fileID: 2022411609}
   - component: {fileID: 2022411608}
+  - component: {fileID: 2022411613}
   m_Layer: 7
   m_Name: Seesaw - Left (7)
   m_TagString: Untagged
@@ -36358,8 +36490,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: 30
-    m_UpperAngle: -30
+    m_LowerAngle: 90
+    m_UpperAngle: -90
 --- !u!61 &2022411609
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -36499,6 +36631,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1621496937}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2022411613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2022411607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911261174178b674a866758f0992ed67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2025078859
 GameObject:
   m_ObjectHideFlags: 0
