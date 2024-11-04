@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+
 
 public class Player : MonoBehaviour
 {
@@ -73,7 +75,9 @@ public class Player : MonoBehaviour
     public float growScaleFactor = 1.5f;
     public float shrinkScaleFactor = 0.5f;
 
-
+    public float maxSizeFloatForce = 35f; // Force applied when floating
+    private bool isInFanZone = false; // Check if player is in the fan zone
+    private bool isMaxSize = false;   // Check if player is at max size
     public enum GroundState
     {
         STATE_STANDING,
@@ -173,6 +177,24 @@ public class Player : MonoBehaviour
         Grounded();
         SlopeCheck();
         Gravity();
+
+        // Check if player is at max size and set isMaxSize accordingly
+        isMaxSize = (_playerSizeState == PlayerSizeState.STATE_LARGE);
+
+        // Apply upward force when in the fan zone and player is at max size
+        if (isInFanZone)
+        {
+            body.AddForce(Vector2.up * maxSizeFloatForce, ForceMode2D.Force);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("FanZone"))
+        {
+            isInFanZone = false;
+            Debug.Log("Exited Fan Zone");
+        }
     }
 
     public PlayerSizeState getPlayerSize()
@@ -479,6 +501,11 @@ public class Player : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("Collided with: " + other.gameObject.name);
+        if (other.CompareTag("FanZone"))
+        {
+            isInFanZone = true;
+            Debug.Log("Entered the xFan Zone");
+        }
 
         if (other.CompareTag("Diamond_Tag"))
         {
@@ -503,6 +530,7 @@ public class Player : MonoBehaviour
         if (other.CompareTag("End_Plate"))
         {
             endText.SetActive(true);
+
             float finalStateTime = Time.time - lastStateChangeTime;
             Debug.Log("Time spent in the final state: " + finalStateTime);
             Debug.Log("Final state: " + _playerSizeState);
@@ -541,6 +569,18 @@ public class Player : MonoBehaviour
             Debug.Log("Heatmap Coordinates: " + GetSerializedData());
             googleMetricsSender.GetComponent<SendToGoogle>().Send(mostCommonSizeState, respawnCount1, respawnCount2, respawnCount3, respawnCount4, respawnCount5, GetSerializedData());
             Debug.Log("Metrics sent!");
+
+            StartCoroutine(LoadSceneAfterDelay());
+
+            IEnumerator LoadSceneAfterDelay()
+            {
+                // Wait for 1 seconds
+                yield return new WaitForSeconds(1f);
+
+                // Load the scene
+                SceneManager.LoadScene("LevelSelectionScene");
+            }
+
         }
     }
 
@@ -663,5 +703,5 @@ public class SerializableDictionary
             keys.Add(kvp.Key);
             values.Add(kvp.Value);
         }
+        }
     }
-}

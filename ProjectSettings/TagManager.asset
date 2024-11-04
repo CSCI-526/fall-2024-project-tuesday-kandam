@@ -13,6 +13,7 @@ TagManager:
   - Hex_Key_Tag
   - Hex_Key_Plate
   - Breakable_Brick
+  - FanZone
   layers:
   - Default
   - TransparentFX

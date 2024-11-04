@@ -683,6 +683,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 77751785}
+  impactImpulseThreshold: 20
 --- !u!251 &77751783
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -1904,7 +1905,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &204780626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9355,7 +9356,7 @@ MonoBehaviour:
   shrinkScaleFactor: 0.5
   _groundState: 0
   _prevState: 0
-  respawnStartingPos: {x: -14, y: 0, z: 0}
+  respawnOriginalPos: {x: -14, y: 0, z: 0}
   endText: {fileID: 2017342659}
   HEXKey: {fileID: 74110919}
   Hex_KeyPlate: {fileID: 802163446}
@@ -14513,6 +14514,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1641567035}
+  impactImpulseThreshold: 20
 --- !u!251 &1641567038
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -15095,6 +15097,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1757976168}
+  impactImpulseThreshold: 20
 --- !u!251 &1757976166
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -17022,6 +17025,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1941737481}
+  impactImpulseThreshold: 20
 --- !u!251 &1941737479
 PlatformEffector2D:
   m_ObjectHideFlags: 0
