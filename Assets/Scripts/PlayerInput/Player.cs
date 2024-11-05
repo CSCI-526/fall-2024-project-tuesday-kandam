@@ -107,7 +107,7 @@ public class Player : MonoBehaviour
     private Vector3 originalScale; // Store original size for shrinking back
     private float radius;
     private Vector3 lastCheckpointPosition; // Store the checkpoint position
-    public Vector3 respawnOriginalPos =new Vector3(-14, 0, 0); // Store the checkpoint position
+    public Vector3 respawnOriginalPos = new Vector3(-14, 0, 0); // Store the checkpoint position
     private string lastCheckpointName; // Store the checkpoint name
     private bool hasCheckpoint;
 
@@ -117,6 +117,9 @@ public class Player : MonoBehaviour
     private Dictionary<PlayerSizeState, float> sizeStateTimeSpent = new Dictionary<PlayerSizeState, float>();
     private float lastStateChangeTime; // To store the time of the last state change
     private Dictionary<Vector2, int> positionCounts = new Dictionary<Vector2, int>();
+
+    private Dictionary<String, Dictionary<PlayerSizeState, float>> stateSizeTimeSpentPerChkpt = new Dictionary<String, Dictionary<PlayerSizeState, float>>();
+    private float lastStateChangeTimeperCheckpoint;
     private float recordInterval = 0.5f; // Record every 0.5 seconds
     private float timer = 0f;
 
@@ -136,11 +139,28 @@ public class Player : MonoBehaviour
 
         // Initialize the size state counts
         // Initialize the size state time tracker
-        sizeStateTimeSpent[PlayerSizeState.STATE_SMALL] = 0f;
-        sizeStateTimeSpent[PlayerSizeState.STATE_MED] = 0f;
-        sizeStateTimeSpent[PlayerSizeState.STATE_LARGE] = 0f;
+        // sizeStateTimeSpent[PlayerSizeState.STATE_SMALL] = 0f;
+        // sizeStateTimeSpent[PlayerSizeState.STATE_MED] = 0f;
+        // sizeStateTimeSpent[PlayerSizeState.STATE_LARGE] = 0f;
+        lastCheckpointName = "Start";
+        InitializeSizeStateCounts(sizeStateTimeSpent);
+
+        // TODO: Obtain number of checkpoints dynamically
+        stateSizeTimeSpentPerChkpt["Start"] = new Dictionary<PlayerSizeState, float>();
+        stateSizeTimeSpentPerChkpt["Checkpoint 1"] = new Dictionary<PlayerSizeState, float>();
+        stateSizeTimeSpentPerChkpt["Checkpoint 2"] = new Dictionary<PlayerSizeState, float>();
+        stateSizeTimeSpentPerChkpt["Checkpoint 3"] = new Dictionary<PlayerSizeState, float>();
+        stateSizeTimeSpentPerChkpt["Checkpoint 4"] = new Dictionary<PlayerSizeState, float>();
+
+        InitializeSizeStateCounts(stateSizeTimeSpentPerChkpt["Start"]);
+        InitializeSizeStateCounts(stateSizeTimeSpentPerChkpt["Checkpoint 1"]);
+        InitializeSizeStateCounts(stateSizeTimeSpentPerChkpt["Checkpoint 2"]);
+        InitializeSizeStateCounts(stateSizeTimeSpentPerChkpt["Checkpoint 3"]);
+        InitializeSizeStateCounts(stateSizeTimeSpentPerChkpt["Checkpoint 4"]);
+
 
         lastStateChangeTime = Time.time; // Record the start time
+        lastStateChangeTimeperCheckpoint = Time.time; // Record the start time
 
         moveSpeed = MmoveSpeed;
         jumpHeight = MjumpHeight;
@@ -204,7 +224,7 @@ public class Player : MonoBehaviour
 
     private void HandleMovement()
     {
-        if(isGrounded)
+        if (isGrounded)
         {
             if (_playerSizeState == PlayerSizeState.STATE_LARGE)
             {
@@ -217,9 +237,9 @@ public class Player : MonoBehaviour
             else if (isOnSlope && !isJumping)
             {
 
-                    body.velocity = new Vector2(-movementInput.x * slopeNormalPerp.x * moveSpeed, -movementInput.x * slopeNormalPerp.y * moveSpeed);
+                body.velocity = new Vector2(-movementInput.x * slopeNormalPerp.x * moveSpeed, -movementInput.x * slopeNormalPerp.y * moveSpeed);
             }
-        }    
+        }
         else
         {
             body.velocity = new Vector2(movementInput.x * moveSpeed * 0.7f, body.velocity.y);
@@ -405,11 +425,16 @@ public class Player : MonoBehaviour
     private void ChangePlayerSizeState()
     {
         // Before switching the state, calculate time spent in the current state
+        Debug.Log("Current chkpt: " + lastCheckpointName);
         Debug.Log("Time spent in the current state: " + (Time.time - lastStateChangeTime));
         Debug.Log("Current state before switching: " + _playerSizeState);
         Debug.Log("Prev state before switching: " + _prevSizeState);
         float currentStateTime = Time.time - lastStateChangeTime; // Time spent in the current state
+        float currentStateTimePerCheckpoint = Time.time - lastStateChangeTimeperCheckpoint; // Time spent in the current state
         sizeStateTimeSpent[_prevSizeState] += currentStateTime;
+        Debug.Log("Updated sizeStateTimeSpent");
+        stateSizeTimeSpentPerChkpt[lastCheckpointName][_prevSizeState] += currentStateTimePerCheckpoint;
+        Debug.Log("Updated stateSizeTimeSpentPerChkpt");
 
         // Perform the state change
         if (_playerSizeState == PlayerSizeState.STATE_MED)
@@ -445,6 +470,7 @@ public class Player : MonoBehaviour
 
         // Reset last state change time to now
         lastStateChangeTime = Time.time;
+        lastStateChangeTimeperCheckpoint = Time.time;
 
         // Update the size state count
         Debug.Log("Player size state: " + _playerSizeState);
@@ -522,6 +548,12 @@ public class Player : MonoBehaviour
         if (other.CompareTag("Checkpoint_Tag"))
         {
             Debug.Log("Checkpoint reached!");
+            float currentStateTimePerCheckpoint = Time.time - lastStateChangeTimeperCheckpoint;
+            Debug.Log("Time spent in the current state (" + _playerSizeState + "): " + currentStateTimePerCheckpoint);
+
+            stateSizeTimeSpentPerChkpt[lastCheckpointName][_playerSizeState] += currentStateTimePerCheckpoint;
+            Debug.Log("Updated stateSizeTimeSpentPerChkpt");
+            lastStateChangeTimeperCheckpoint = Time.time;
             Debug.Log("Checkpoint position added to the dictionary. Position: " + other.transform.position + " Name: " + other.GameObject().name);
             SetCheckpoint(other.transform.position, other.GameObject().name);
 
@@ -535,6 +567,8 @@ public class Player : MonoBehaviour
             Debug.Log("Time spent in the final state: " + finalStateTime);
             Debug.Log("Final state: " + _playerSizeState);
             sizeStateTimeSpent[_playerSizeState] += finalStateTime;
+            Debug.Log("Updated sizeStateTimeSpent");
+            stateSizeTimeSpentPerChkpt[lastCheckpointName][_playerSizeState] += finalStateTime;
             Debug.Log("Reached the end, sending metrics...");
             string mostCommonSizeState = GetLongestState().ToString(); // Convert enum to string
             // Checkpoint position added to the dictionary. Position: (-9.44, 16.89, 0.00)
@@ -566,8 +600,35 @@ public class Player : MonoBehaviour
             Debug.Log("Respawn count for checkpoint 3: " + respawnCount3);
             Debug.Log("Respawn count for checkpoint 4: " + respawnCount4);
             Debug.Log("Respawn count for checkpoint 5: " + respawnCount5);
-            Debug.Log("Heatmap Coordinates: " + GetSerializedData());
-            googleMetricsSender.GetComponent<SendToGoogle>().Send(mostCommonSizeState, respawnCount1, respawnCount2, respawnCount3, respawnCount4, respawnCount5, GetSerializedData());
+            Debug.Log("Heatmap Coordinates: " + GetSerializedDataHeatmap());
+            // Debug.Log("Data: " + stateSizeTimeSpentPerChkpt);
+            foreach (var kvp in stateSizeTimeSpentPerChkpt)
+            {
+                Debug.Log("Checkpoint: " + kvp.Key);
+                foreach (var kvp2 in kvp.Value)
+                {
+                    Debug.Log("Size state: " + kvp2.Key + " Time spent: " + kvp2.Value);
+                }
+            }
+            List<string> jsonEntries = new List<string>();
+
+            foreach (var checkpoint in stateSizeTimeSpentPerChkpt)
+            {
+                string checkpointKey = checkpoint.Key;
+                List<string> stateEntries = new List<string>();
+
+                foreach (var stateEntry in checkpoint.Value)
+                {
+                    stateEntries.Add($"\"{stateEntry.Key}\": {stateEntry.Value}");
+                }
+
+                string stateJson = "{" + string.Join(", ", stateEntries) + "}";
+                jsonEntries.Add($"\"{checkpointKey}\": {stateJson}");
+            }
+
+            string finalJson = "{" + string.Join(", ", jsonEntries) + "}";
+            Debug.Log(" JSON Data: " + finalJson);
+            googleMetricsSender.GetComponent<SendToGoogle>().Send(mostCommonSizeState, respawnCount1, respawnCount2, respawnCount3, respawnCount4, respawnCount5, GetSerializedDataHeatmap());
             Debug.Log("Metrics sent!");
 
             StartCoroutine(LoadSceneAfterDelay());
@@ -683,25 +744,48 @@ public class Player : MonoBehaviour
 
         return longestState;
     }
-    public string GetSerializedData()
+    public string GetSerializedDataHeatmap()
     {
-        return JsonUtility.ToJson(new SerializableDictionary(positionCounts));
+        return JsonUtility.ToJson(new SerializableDictionaryHeatmap(positionCounts));
+    }
+
+
+    private void InitializeSizeStateCounts(Dictionary<PlayerSizeState, float> stateDict)
+    {
+        stateDict[PlayerSizeState.STATE_SMALL] = 0f;
+        stateDict[PlayerSizeState.STATE_MED] = 0f;
+        stateDict[PlayerSizeState.STATE_LARGE] = 0f;
     }
 
 }
 
 [System.Serializable]
-public class SerializableDictionary
+public class SerializableDictionaryHeatmap
 {
     public List<Vector2> keys = new List<Vector2>();
     public List<int> values = new List<int>();
 
-    public SerializableDictionary(Dictionary<Vector2, int> dictionary)
+    public SerializableDictionaryHeatmap(Dictionary<Vector2, int> dictionary)
     {
         foreach (var kvp in dictionary)
         {
             keys.Add(kvp.Key);
             values.Add(kvp.Value);
         }
-        }
     }
+}
+
+[System.Serializable]
+public class NestedDictionaryEntry
+{
+    public string state;
+    public float timeSpent;
+
+    public NestedDictionaryEntry(string state, float timeSpent)
+    {
+        this.state = state;
+        this.timeSpent = timeSpent;
+    }
+}
+
+
