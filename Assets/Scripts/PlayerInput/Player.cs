@@ -628,7 +628,7 @@ public class Player : MonoBehaviour
 
             string finalJson = "{" + string.Join(", ", jsonEntries) + "}";
             Debug.Log(" JSON Data: " + finalJson);
-            // googleMetricsSender.GetComponent<SendToGoogle>().Send(mostCommonSizeState, respawnCount1, respawnCount2, respawnCount3, respawnCount4, respawnCount5, GetSerializedDataHeatmap());
+            googleMetricsSender.GetComponent<SendToGoogle>().Send(mostCommonSizeState, respawnCount1, respawnCount2, respawnCount3, respawnCount4, respawnCount5, GetSerializedDataHeatmap());
             Debug.Log("Metrics sent!");
 
             StartCoroutine(LoadSceneAfterDelay());
