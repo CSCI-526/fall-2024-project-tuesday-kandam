@@ -179,7 +179,7 @@ public class Player : MonoBehaviour
         Gravity();
 
         // Check if player is at max size and set isMaxSize accordingly
-        isMaxSize = (_playerSizeState == PlayerSizeState.STATE_MED);
+        isMaxSize = (_playerSizeState == PlayerSizeState.STATE_LARGE);
 
         //Apply upward force when in the fan zone and player is at max size
         if (isInFanZone && isMaxSize)
