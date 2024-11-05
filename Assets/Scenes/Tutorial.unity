@@ -1366,11 +1366,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 382417926500247114, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 175.6
+      value: -15.8
       objectReference: {fileID: 0}
     - target: {fileID: 382417926500247114, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 45.6
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 382417926500247114, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1662,7 +1662,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &297039861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5876,6 +5876,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4d354854f9204067b38f02285221804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  URL: 
+  entrySessionID: 
+  entryMostCommonSizeState: 
+  entryRespawnCount1: 
+  entryRespawnCount2: 
+  entryRespawnCount3: 
+  entryRespawnCount4: 
+  entryRespawnCount5: 
+  entryHeatmapCoords: 
 --- !u!4 &1200623203
 Transform:
   m_ObjectHideFlags: 0
