@@ -76,7 +76,7 @@ public class Player : MonoBehaviour
     public float shrinkScaleFactor = 0.5f;
 
     public float maxSizeFloatForce = 35f; // Force applied when floating
-    private bool isInFanZone = false; // Check if player is in the fan zone
+    private bool isInFanZone; // Check if player is in the fan zone
     private bool isMaxSize = false;   // Check if player is at max size
     public enum GroundState
     {
@@ -201,9 +201,9 @@ public class Player : MonoBehaviour
         // Check if player is at max size and set isMaxSize accordingly
         isMaxSize = (_playerSizeState == PlayerSizeState.STATE_LARGE);
 
-        // Apply upward force when in the fan zone and player is at max size
-        if (isInFanZone)
-        {
+        //Apply upward force when in the fan zone and player is at max size
+        if (isInFanZone && isMaxSize)
+        {   Debug.Log("Fan Zone");
             body.AddForce(Vector2.up * maxSizeFloatForce, ForceMode2D.Force);
         }
     }
