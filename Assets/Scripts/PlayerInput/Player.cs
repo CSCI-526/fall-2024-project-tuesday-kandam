@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     InputActionReference movement;
     [SerializeField]
-    private Rigidbody2D body;
+    public Rigidbody2D body;
     [SerializeField]
     private CircleCollider2D circleCollider;
     [SerializeField]
@@ -75,9 +75,9 @@ public class Player : MonoBehaviour
     public float growScaleFactor = 1.5f;
     public float shrinkScaleFactor = 0.5f;
 
-    public float maxSizeFloatForce = 35f; // Force applied when floating
-    private bool isInFanZone; // Check if player is in the fan zone
-    private bool isMaxSize = false;   // Check if player is at max size
+    //public float maxSizeFloatForce = 35f; // Force applied when floating
+    //private bool isInFanZone; // Check if player is in the fan zone
+    //private bool isMaxSize = false;   // Check if player is at max size
     public enum GroundState
     {
         STATE_STANDING,
@@ -198,23 +198,23 @@ public class Player : MonoBehaviour
         SlopeCheck();
         Gravity();
 
-        // Check if player is at max size and set isMaxSize accordingly
-        isMaxSize = (_playerSizeState == PlayerSizeState.STATE_LARGE);
+        //// Check if player is at max size and set isMaxSize accordingly
+        //isMaxSize = (_playerSizeState == PlayerSizeState.STATE_LARGE);
 
-        //Apply upward force when in the fan zone and player is at max size
-        if (isInFanZone && isMaxSize)
-        {   Debug.Log("Fan Zone");
-            body.AddForce(Vector2.up * maxSizeFloatForce, ForceMode2D.Force);
-        }
+        ////Apply upward force when in the fan zone and player is at max size
+        //if (isInFanZone && isMaxSize)
+        //{   Debug.Log("Fan Zone");
+        //    body.AddForce(Vector2.up * maxSizeFloatForce, ForceMode2D.Force);
+        //}
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("FanZone"))
-        {
-            isInFanZone = false;
-            Debug.Log("Exited Fan Zone");
-        }
+        //if (other.CompareTag("FanZone"))
+        //{
+        //    isInFanZone = false;
+        //    Debug.Log("Exited Fan Zone");
+        //}
     }
 
     public PlayerSizeState getPlayerSize()
@@ -526,12 +526,12 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Collided with: " + other.gameObject.name);
-        if (other.CompareTag("FanZone"))
-        {
-            isInFanZone = true;
-            Debug.Log("Entered the xFan Zone");
-        }
+        //Debug.Log("Collided with: " + other.gameObject.name);
+        //if (other.CompareTag("FanZone"))
+        //{
+        //    isInFanZone = true;
+        //    Debug.Log("Entered the xFan Zone");
+        //}
 
         if (other.CompareTag("Diamond_Tag"))
         {
