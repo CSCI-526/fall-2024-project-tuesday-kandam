@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FanPlatforms : MonoBehaviour
 {
-    float fanStrength = 35;
+    public float fanStrength = 35;
     void Start()
     {
     }
