@@ -13,11 +13,17 @@ public class DiamondManager : MonoBehaviour
 
     void Start()
     {
-        totalDiamonds = GameObject.FindGameObjectsWithTag("Diamond_Tag").Length -1;
+        totalDiamonds = GameObject.FindGameObjectsWithTag("Diamond_Tag").Length - 1 ;
+        Debug.Log("Total Diamonds in Level: " + totalDiamonds);
     }
 
     void Update()
     { 
         diamondText.text = "Diamond Count: " + diamondCount.ToString() + "/" + totalDiamonds;
+    }
+
+    public int GetTotalDiamonds()
+    {
+        return totalDiamonds;
     }
 }
