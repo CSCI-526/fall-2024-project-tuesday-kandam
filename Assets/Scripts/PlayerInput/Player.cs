@@ -75,6 +75,8 @@ public class Player : MonoBehaviour
     public float growScaleFactor = 1.5f;
     public float shrinkScaleFactor = 0.5f;
 
+    
+
     //public float maxSizeFloatForce = 35f; // Force applied when floating
     //private bool isInFanZone; // Check if player is in the fan zone
     //private bool isMaxSize = false;   // Check if player is at max size
@@ -523,6 +525,7 @@ public class Player : MonoBehaviour
     public GameObject HEXKey;
     public GameObject Hex_KeyPlate;
     public GameObject googleMetricsSender;
+    public DiamondManager dm;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -537,6 +540,7 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Collected a diamond!");
             Destroy(other.gameObject);
+            dm.diamondCount++;
         }
 
         if (other.CompareTag("Spike_Tag"))
