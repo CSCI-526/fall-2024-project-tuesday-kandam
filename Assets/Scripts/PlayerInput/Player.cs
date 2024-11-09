@@ -529,6 +529,7 @@ public class Player : MonoBehaviour
     public GameObject Hex_KeyPlate;
     public GameObject googleMetricsSender;
     public DiamondManager dm;
+    public GameObject DoorOpenText;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -544,6 +545,17 @@ public class Player : MonoBehaviour
             Debug.Log("Collected a diamond!");
             Destroy(other.gameObject);
             dm.diamondCount++;
+
+            int totalDiamonds = dm.GetTotalDiamonds();
+            int seventyPercentDiamonds = Mathf.FloorToInt(totalDiamonds * 0.75f);
+            Debug.Log("75% of total diamonds: " + seventyPercentDiamonds);
+
+            if (dm.diamondCount >= seventyPercentDiamonds)
+            {
+                Hex_KeyPlate.SetActive(false);  // Deactivate the Hex_KeyPlate
+                Debug.Log("Hex KeyPlate deactivated as 75% of diamonds were collected.");
+                DoorOpenText.SetActive(true);
+            }
         }
 
         if (other.CompareTag("Spike_Tag"))
@@ -652,6 +664,8 @@ public class Player : MonoBehaviour
         }
     }
 
+    public GameObject fiftyPercentText;
+
     private void OnCollisionEnter2D(Collision2D other)
     {
 
@@ -702,8 +716,9 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("Hex_Key_Tag")) // Check for the HEXKey
         {
             HEXKey.SetActive(false);
-            Hex_KeyPlate.SetActive(false); // Destroy hexkey_plate object
-            Debug.Log("Touched Hex_Key_Tag and destroyed Hex_Key_Plate!");
+            //Hex_KeyPlate.SetActive(false); // Destroy hexkey_plate object
+            fiftyPercentText.SetActive(true);
+            Debug.Log("Touched Hex_Key_Tag");
         }
     }
 
