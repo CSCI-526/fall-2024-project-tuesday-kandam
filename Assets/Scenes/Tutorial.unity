@@ -2980,6 +2980,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3438537215870023267, guid: e90afcc86e6f3a34c9ec081142f34a28, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4200410154869340212, guid: e90afcc86e6f3a34c9ec081142f34a28, type: 3}
       propertyPath: m_Name
       value: Canvas - EndScreen
@@ -3046,11 +3050,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4295160404625726877, guid: e90afcc86e6f3a34c9ec081142f34a28, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 138.8
+      value: 188.4
       objectReference: {fileID: 0}
     - target: {fileID: 4295160404625726877, guid: e90afcc86e6f3a34c9ec081142f34a28, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.2
+      value: 47.61
       objectReference: {fileID: 0}
     - target: {fileID: 4295160404625726877, guid: e90afcc86e6f3a34c9ec081142f34a28, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
