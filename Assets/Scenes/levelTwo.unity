@@ -4483,11 +4483,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42acefd798e4275469e398c51e752f52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &98530669 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 382417926500247114, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
-  m_PrefabInstance: {fileID: 228649210}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &99634701
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11102,26 +11097,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 453275949143187912, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
-      propertyPath: orthographic size
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2876322479247208268, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4028688915077192823, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4108619511803248640, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4108619511803248640, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
     - target: {fileID: 4775953298098998668, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
       propertyPath: HEXKey
       value: 
@@ -11131,108 +11106,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1006544766}
     - target: {fileID: 4775953298098998668, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
-      propertyPath: transform
-      value: 
-      objectReference: {fileID: 98530669}
-    - target: {fileID: 4775953298098998668, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
-      propertyPath: LmoveSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4775953298098998668, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
-      propertyPath: LjumpHeight
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4775953298098998668, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
-      propertyPath: MjumpHeight
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4775953298098998668, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
       propertyPath: Hex_KeyPlate
       value: 
       objectReference: {fileID: 1127204074}
     - target: {fileID: 4775953298098998668, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
-      propertyPath: MbaseGravity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4775953298098998668, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
-      propertyPath: LmaxFallSpeed
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4775953298098998668, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
-      propertyPath: MmaxFallSpeed
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4775953298098998668, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
-      propertyPath: SmaxFallSpeed
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4775953298098998668, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
       propertyPath: growScaleFactor
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4775953298098998668, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
-      propertyPath: groundCheckSize.x
-      value: 1.06
-      objectReference: {fileID: 0}
-    - target: {fileID: 4775953298098998668, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
-      propertyPath: groundCheckSize.y
-      value: 0.14
-      objectReference: {fileID: 0}
-    - target: {fileID: 4775953298098998668, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
-      propertyPath: maxSizeFloatForce
-      value: 50
+      value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 4775953298098998668, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
       propertyPath: googleMetricsSender
       value: 
       objectReference: {fileID: 1081499968}
-    - target: {fileID: 4775953298098998668, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
-      propertyPath: LfallSpeedMultiplier
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 4775953298098998668, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
-      propertyPath: MfallSpeedMultiplier
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4775953298098998668, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
-      propertyPath: SfallSpeedMultiplier
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4775953298098998668, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
-      propertyPath: respawnOriginalPos.x
-      value: -17
-      objectReference: {fileID: 0}
-    - target: {fileID: 4775953298098998668, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
-      propertyPath: respawnOriginalPos.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4775953298098998668, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
-      propertyPath: respawnStartingPos.x
-      value: -17
-      objectReference: {fileID: 0}
-    - target: {fileID: 5233311108746225548, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6638863878769751426, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6638863878769751426, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6904024381548348842, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 6904024381548348842, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7435090636432438646, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
-      propertyPath: m_Layer
-      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
