@@ -101,7 +101,7 @@ public class Player : MonoBehaviour
 
     public GroundState _groundState;
     public GroundState _prevState;
-    private PlayerSizeState _playerSizeState;
+    public PlayerSizeState _playerSizeState;
 
     private PlayerSizeState _prevSizeState;
     private PlayerMoveState _playerMoveState;
@@ -438,6 +438,8 @@ public class Player : MonoBehaviour
         stateSizeTimeSpentPerChkpt[lastCheckpointName][_prevSizeState] += currentStateTimePerCheckpoint;
         Debug.Log("Updated stateSizeTimeSpentPerChkpt");
 
+        transform.SetParent(null);
+
         // Perform the state change
         if (_playerSizeState == PlayerSizeState.STATE_MED)
         {
@@ -448,6 +450,7 @@ public class Player : MonoBehaviour
             playerMass = MplayerMass;
             maxFallSpeed = MmaxFallSpeed;
             radius = circleCollider.radius;
+
         }
         else if (_playerSizeState == PlayerSizeState.STATE_SMALL)
         {
