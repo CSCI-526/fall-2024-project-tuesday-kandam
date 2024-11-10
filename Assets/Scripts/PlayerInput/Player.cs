@@ -75,7 +75,7 @@ public class Player : MonoBehaviour
     public float growScaleFactor = 1.5f;
     public float shrinkScaleFactor = 0.5f;
 
-    
+
 
     //public float maxSizeFloatForce = 35f; // Force applied when floating
     //private bool isInFanZone; // Check if player is in the fan zone
@@ -147,18 +147,18 @@ public class Player : MonoBehaviour
         lastCheckpointName = "Start";
         InitializeSizeStateCounts(sizeStateTimeSpent);
 
-        // TODO: Obtain number of checkpoints dynamically
+        // // TODO: Obtain number of checkpoints dynamically
         stateSizeTimeSpentPerChkpt["Start"] = new Dictionary<PlayerSizeState, float>();
-        stateSizeTimeSpentPerChkpt["Checkpoint 1"] = new Dictionary<PlayerSizeState, float>();
-        stateSizeTimeSpentPerChkpt["Checkpoint 2"] = new Dictionary<PlayerSizeState, float>();
-        stateSizeTimeSpentPerChkpt["Checkpoint 3"] = new Dictionary<PlayerSizeState, float>();
-        stateSizeTimeSpentPerChkpt["Checkpoint 4"] = new Dictionary<PlayerSizeState, float>();
+        // stateSizeTimeSpentPerChkpt["Checkpoint 1"] = new Dictionary<PlayerSizeState, float>();
+        // stateSizeTimeSpentPerChkpt["Checkpoint 2"] = new Dictionary<PlayerSizeState, float>();
+        // stateSizeTimeSpentPerChkpt["Checkpoint 3"] = new Dictionary<PlayerSizeState, float>();
+        // stateSizeTimeSpentPerChkpt["Checkpoint 4"] = new Dictionary<PlayerSizeState, float>();
 
         InitializeSizeStateCounts(stateSizeTimeSpentPerChkpt["Start"]);
-        InitializeSizeStateCounts(stateSizeTimeSpentPerChkpt["Checkpoint 1"]);
-        InitializeSizeStateCounts(stateSizeTimeSpentPerChkpt["Checkpoint 2"]);
-        InitializeSizeStateCounts(stateSizeTimeSpentPerChkpt["Checkpoint 3"]);
-        InitializeSizeStateCounts(stateSizeTimeSpentPerChkpt["Checkpoint 4"]);
+        // InitializeSizeStateCounts(stateSizeTimeSpentPerChkpt["Checkpoint 1"]);
+        // InitializeSizeStateCounts(stateSizeTimeSpentPerChkpt["Checkpoint 2"]);
+        // InitializeSizeStateCounts(stateSizeTimeSpentPerChkpt["Checkpoint 3"]);
+        // InitializeSizeStateCounts(stateSizeTimeSpentPerChkpt["Checkpoint 4"]);
 
 
         lastStateChangeTime = Time.time; // Record the start time
@@ -434,6 +434,12 @@ public class Player : MonoBehaviour
         float currentStateTime = Time.time - lastStateChangeTime; // Time spent in the current state
         float currentStateTimePerCheckpoint = Time.time - lastStateChangeTimeperCheckpoint; // Time spent in the current state
         sizeStateTimeSpent[_prevSizeState] += currentStateTime;
+        // if (!sizeStateTimeSpent.ContainsKey(lastCheckpointName))
+        // {
+        //     Debug.Log("Checkpoint does not exist in the dictionary. Adding it...");
+        //     sizeStateTimeSpent[lastCheckpointName] = new Dictionary<PlayerSizeState, float>();
+        //     InitializeSizeStateCounts(sizeStateTimeSpent[lastCheckpointName]);
+        // }
         Debug.Log("Updated sizeStateTimeSpent");
         stateSizeTimeSpentPerChkpt[lastCheckpointName][_prevSizeState] += currentStateTimePerCheckpoint;
         Debug.Log("Updated stateSizeTimeSpentPerChkpt");
@@ -484,9 +490,36 @@ public class Player : MonoBehaviour
 
     public void SetCheckpoint(Vector3 position, string checkpointName)
     {
-        lastCheckpointPosition = position;
         hasCheckpoint = true;
-        lastCheckpointName = checkpointName;
+        if (lastCheckpointName == checkpointName)
+        {
+            Debug.Log("SetCheckpoint: Checkpoint position already exists in the dictionary. Position: " + lastCheckpointPosition + " Name: " + lastCheckpointName);
+            return;
+        }
+
+        // if the checkpoint position does not exist in the dictionary, add it
+        if (!checkpointRespawnCounts.ContainsKey(checkpointName))
+        {
+            float currentStateTimePerCheckpoint = Time.time - lastStateChangeTimeperCheckpoint;
+            Debug.Log("Time spent in the current state (" + _playerSizeState + "): " + currentStateTimePerCheckpoint);
+            stateSizeTimeSpentPerChkpt[lastCheckpointName][_playerSizeState] += currentStateTimePerCheckpoint;
+            Debug.Log("Updated stateSizeTimeSpentPerChkpt");
+            lastStateChangeTimeperCheckpoint = Time.time;
+            Debug.Log("Time spent between " + lastCheckpointName + " and " + checkpointName + ": " + currentStateTimePerCheckpoint);
+            // add the checkpoint position to the dictionary
+            if (!stateSizeTimeSpentPerChkpt.ContainsKey(checkpointName))
+            {
+                Debug.Log("Checkpoint '" + checkpointName + "' does not exist in the stateSizeTimeSpentPerChkpt dictionary. Adding it...");
+                stateSizeTimeSpentPerChkpt[checkpointName] = new Dictionary<PlayerSizeState, float>();
+                InitializeSizeStateCounts(stateSizeTimeSpentPerChkpt[checkpointName]);
+            }
+
+            Debug.Log("SetCheckpoint: Checkpoint position added to the dictionary. Position: " + position + " Name: " + checkpointName);
+            checkpointRespawnCounts[checkpointName] = 1;
+            
+            lastCheckpointName = checkpointName;
+            lastCheckpointPosition = position;
+        }
     }
 
     public void Respawn()
@@ -514,6 +547,13 @@ public class Player : MonoBehaviour
         {
             body.velocity = Vector2.zero;
             body.angularVelocity = 0f;
+        }
+
+        // finally, reset the player size state
+        if (_playerSizeState != PlayerSizeState.STATE_MED)
+        {
+            _playerSizeState = PlayerSizeState.STATE_MED;
+            ChangePlayerSizeState();
         }
     }
 
@@ -561,19 +601,20 @@ public class Player : MonoBehaviour
         if (other.CompareTag("Spike_Tag"))
         {
             Debug.Log("Hit a spike! Respawning...");
+            // _playerSizeState = PlayerSizeState.STATE_MED;
             Respawn();
         }
 
         if (other.CompareTag("Checkpoint_Tag"))
         {
             Debug.Log("Checkpoint reached!");
-            float currentStateTimePerCheckpoint = Time.time - lastStateChangeTimeperCheckpoint;
-            Debug.Log("Time spent in the current state (" + _playerSizeState + "): " + currentStateTimePerCheckpoint);
-
-            stateSizeTimeSpentPerChkpt[lastCheckpointName][_playerSizeState] += currentStateTimePerCheckpoint;
-            Debug.Log("Updated stateSizeTimeSpentPerChkpt");
-            lastStateChangeTimeperCheckpoint = Time.time;
-            Debug.Log("Checkpoint position added to the dictionary. Position: " + other.transform.position + " Name: " + other.GameObject().name);
+            // if (!checkpointRespawnCounts.ContainsKey(lastCheckpointName))
+            // {
+            //     // if the checkpoint position does not exist in the dictionary, add it
+            //     Debug.Log("Checkpoint position added to the dictionary. Position: " + other.transform.position + " Name: " + other.GameObject().name);
+            //     checkpointRespawnCounts[lastCheckpointName] = 1;
+            // }
+            // Debug.Log("Checkpoint position added to the dictionary. Position: " + other.transform.position + " Name: " + other.GameObject().name);
             SetCheckpoint(other.transform.position, other.GameObject().name);
 
         }
