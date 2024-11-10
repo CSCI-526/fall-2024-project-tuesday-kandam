@@ -1467,7 +1467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 77751785}
-  impactImpulseThreshold: 25
+  impactImpulseThreshold: 21
 --- !u!251 &77751783
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -3038,7 +3038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207d36379e6015f47b26038c166698aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activatedColor: {r: 0.23933774, g: 0.93962264, b: 0.29422098, a: 0}
+  activatedColor: {r: 0.33333334, g: 0.4117647, b: 0.8352941, a: 1}
 --- !u!58 &144818657
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -15805,7 +15805,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207d36379e6015f47b26038c166698aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activatedColor: {r: 0.23933774, g: 0.93962264, b: 0.29422098, a: 0}
+  activatedColor: {r: 0.34117648, g: 0.4117647, b: 0.8352941, a: 1}
 --- !u!58 &968427224
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -18054,7 +18054,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207d36379e6015f47b26038c166698aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activatedColor: {r: 0.23933774, g: 0.93962264, b: 0.29422098, a: 0}
+  activatedColor: {r: 0.3254902, g: 0.4117647, b: 0.8352941, a: 1}
 --- !u!58 &1196033157
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -20041,6 +20041,7 @@ GameObject:
   - component: {fileID: 1308772593}
   - component: {fileID: 1308772595}
   - component: {fileID: 1308772594}
+  - component: {fileID: 1308772596}
   m_Layer: 0
   m_Name: Checkpoint 1
   m_TagString: Checkpoint_Tag
@@ -20078,7 +20079,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207d36379e6015f47b26038c166698aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activatedColor: {r: 0.23933774, g: 0.93962264, b: 0.29422098, a: 0}
+  activatedColor: {r: 0.34117648, g: 0.4135531, b: 0.9529412, a: 1}
 --- !u!58 &1308772595
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -20114,6 +20115,58 @@ CircleCollider2D:
   m_Offset: {x: -1.885376, y: 0}
   serializedVersion: 2
   m_Radius: 0.8
+--- !u!212 &1308772596
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1308772592}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 0.9547169, g: 0.898875, b: 0.898875, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &1319342604
 GameObject:
   m_ObjectHideFlags: 0
@@ -20262,7 +20315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1328392863}
-  impactImpulseThreshold: 25
+  impactImpulseThreshold: 21
 --- !u!251 &1328392861
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -25632,7 +25685,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1641567035}
-  impactImpulseThreshold: 25
+  impactImpulseThreshold: 21
 --- !u!251 &1641567038
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -27637,7 +27690,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1757976168}
-  impactImpulseThreshold: 25
+  impactImpulseThreshold: 21
 --- !u!251 &1757976166
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -29603,11 +29656,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 382417926500247114, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.6
+      value: -17.32
       objectReference: {fileID: 0}
     - target: {fileID: 382417926500247114, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 47.4
+      value: 47.9
       objectReference: {fileID: 0}
     - target: {fileID: 382417926500247114, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
       propertyPath: m_LocalPosition.z
@@ -31214,7 +31267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1941737481}
-  impactImpulseThreshold: 25
+  impactImpulseThreshold: 21
 --- !u!251 &1941737479
 PlatformEffector2D:
   m_ObjectHideFlags: 0

@@ -504,7 +504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207d36379e6015f47b26038c166698aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activatedColor: {r: 0.23933774, g: 0.93962264, b: 0.29422098, a: 0}
+  activatedColor: {r: 0.3254902, g: 0.4117647, b: 0.8352941, a: 1}
 --- !u!58 &65230587
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3808,7 +3808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207d36379e6015f47b26038c166698aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activatedColor: {r: 0.23933774, g: 0.93962264, b: 0.29422098, a: 0}
+  activatedColor: {r: 0.3254902, g: 0.4117647, b: 0.8352941, a: 1}
 --- !u!58 &867436339
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4076,7 +4076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207d36379e6015f47b26038c166698aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activatedColor: {r: 0.23933774, g: 0.93962264, b: 0.29422098, a: 0}
+  activatedColor: {r: 0.3254902, g: 0.4117647, b: 0.8352941, a: 1}
 --- !u!58 &923051835
 CircleCollider2D:
   m_ObjectHideFlags: 0
