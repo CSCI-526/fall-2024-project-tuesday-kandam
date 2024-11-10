@@ -19522,15 +19522,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4d354854f9204067b38f02285221804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  URL: https://docs.google.com/forms/u/1/d/e/1FAIpQLSeWxVpSjMM64zoiO5AnW-76HzuXi0bFjlVbpP2Qc9E4oWb21Q/formResponse
-  entrySessionID: entry.1289655618
-  entryMostCommonSizeState: entry.1889672031
-  entryRespawnCount1: entry.976579775
-  entryRespawnCount2: entry.693963586
-  entryRespawnCount3: entry.527034931
-  entryRespawnCount4: entry.1977834576
-  entryRespawnCount5: entry.2003516449
-  entryHeatmapCoords: entry.776173049
+  URL: https://docs.google.com/forms/u/1/d/e/1FAIpQLSd_qIcAbP-acfY0N4DSy70WXYpq-GZdLbqbcHPK4rICKximKQ/formResponse
+  entrySessionID: entry.1355508304
+  entryMostCommonSizeState: entry.1566807151
+  entryMCSDataOverall: entry.2127145309
+  entryMCSDataPerCheckpoint: entry.594988339
+  entryRespawnData: entry.563226443
+  entryDiamondsCollected: entry.2125984221
+  entryHeatmapCoords: entry.1520328151
 --- !u!4 &1263508328
 Transform:
   m_ObjectHideFlags: 0
@@ -29722,6 +29721,14 @@ PrefabInstance:
       propertyPath: googleMetricsSender
       value: 
       objectReference: {fileID: 1263508326}
+    - target: {fileID: 4775953298098998668, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
+      propertyPath: respawnOriginalPos.x
+      value: -17.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 4775953298098998668, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
+      propertyPath: respawnOriginalPos.y
+      value: 47.9
+      objectReference: {fileID: 0}
     - target: {fileID: 6904024381548348842, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
       propertyPath: m_Name
       value: Player

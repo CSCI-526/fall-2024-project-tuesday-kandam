@@ -515,8 +515,8 @@ public class Player : MonoBehaviour
             }
 
             Debug.Log("SetCheckpoint: Checkpoint position added to the dictionary. Position: " + position + " Name: " + checkpointName);
-            checkpointRespawnCounts[checkpointName] = 1;
-            
+            checkpointRespawnCounts[checkpointName] = 0;
+
             lastCheckpointName = checkpointName;
             lastCheckpointPosition = position;
         }
@@ -533,6 +533,8 @@ public class Player : MonoBehaviour
         {
             body.velocity = Vector2.zero;
             body.angularVelocity = 0f;
+            _playerSizeState = PlayerSizeState.STATE_MED;
+            ChangePlayerSizeState();
         }
         // gameObject.SetActive(false); // Hide the player temporarily
 
@@ -694,7 +696,45 @@ public class Player : MonoBehaviour
 
             string finalJson = "{" + string.Join(", ", jsonEntries) + "}";
             Debug.Log(" JSON Data: " + finalJson);
-            googleMetricsSender.GetComponent<SendToGoogle>().Send(mostCommonSizeState, respawnCount1, respawnCount2, respawnCount3, respawnCount4, respawnCount5, GetSerializedDataHeatmap());
+
+            Debug.Log("Respawn data:");
+            foreach (var kvp in checkpointRespawnCounts)
+            {
+                Debug.Log("Checkpoint: " + kvp.Key + " Respawn count: " + kvp.Value);
+            }
+            List<string> jsonEntriesrespawn = new List<string>();
+
+            // Iterate through the dictionary
+            foreach (var kvp in checkpointRespawnCounts)
+            {
+                // Add each entry in JSON format, where kvp.Key is the checkpoint and kvp.Value is the respawn count
+                jsonEntriesrespawn.Add($"\"{kvp.Key}\": {kvp.Value}");
+            }
+
+            // Join all entries and format them as a JSON object
+            string finalJsonrespawn = "{" + string.Join(", ", jsonEntriesrespawn) + "}";
+
+            // Output the final JSON
+            Debug.Log("JSON Data: " + finalJsonrespawn);
+
+            List<string> jsonEntriessize = new List<string>();
+
+            // Iterate through the dictionary
+            foreach (var kvp in sizeStateTimeSpent)
+            {
+                // Add each entry in JSON format, where kvp.Key is the checkpoint and kvp.Value is the respawn count
+                jsonEntriessize.Add($"\"{kvp.Key}\": {kvp.Value}");
+            }
+
+            // Join all entries and format them as a JSON object
+            string finalJsonsize = "{" + string.Join(", ", jsonEntriessize) + "}";
+
+            // Output the final JSON
+            Debug.Log("JSON Data: " + finalJsonsize);
+
+            // Diamonds collected
+            Debug.Log("Diamonds collected from the level: " + dm.diamondCount);
+            googleMetricsSender.GetComponent<SendToGoogle>().Send(mostCommonSizeState, finalJsonsize, finalJson, finalJsonrespawn, dm.diamondCount.ToString(), GetSerializedDataHeatmap());
             Debug.Log("Metrics sent!");
 
             StartCoroutine(LoadSceneAfterDelay());
