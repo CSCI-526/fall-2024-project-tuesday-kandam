@@ -524,13 +524,31 @@ public class Player : MonoBehaviour
 
     public void Respawn()
     {
+        StartCoroutine(RespawnWithDelay());
+    }
+
+    private IEnumerator RespawnWithDelay()
+    {
+        if (body != null)
+        {
+            body.velocity = Vector2.zero;
+            body.angularVelocity = 0f;
+        }
+        // gameObject.SetActive(false); // Hide the player temporarily
+
+        yield return new WaitForSeconds(0.05f); // Delay
+
         if (hasCheckpoint)
         {
-            transform.position = lastCheckpointPosition;
-            // Update the respawn count for the current checkpoint 
+            // Add a small Y-offset directly to the position
+            Vector3 newPosition = transform.position;
+            newPosition.y = lastCheckpointPosition.y + 3f; // Adjust Y offset as needed
+            newPosition.x = lastCheckpointPosition.x - 2f; // Adjust X offset as needed
+            transform.position = newPosition;
+
+            // Update the respawn count for the current checkpoint
             if (!checkpointRespawnCounts.ContainsKey(lastCheckpointName))
             {
-                // if the checkpoint position does not exist in the dictionary, add it
                 Debug.Log("Checkpoint position added to the dictionary. Position: " + lastCheckpointPosition + " Name: " + lastCheckpointName);
                 checkpointRespawnCounts[lastCheckpointName] = 1;
             }
@@ -542,19 +560,7 @@ public class Player : MonoBehaviour
             transform.position = respawnOriginalPos;
         }
 
-        // Reset the Rigidbody2D velocity to stop the player's movement.
-        if (body != null)
-        {
-            body.velocity = Vector2.zero;
-            body.angularVelocity = 0f;
-        }
-
-        // finally, reset the player size state
-        if (_playerSizeState != PlayerSizeState.STATE_MED)
-        {
-            _playerSizeState = PlayerSizeState.STATE_MED;
-            ChangePlayerSizeState();
-        }
+        // gameObject.SetActive(true); // Make the player visible again
     }
 
     private void OnDrawGizmos()
