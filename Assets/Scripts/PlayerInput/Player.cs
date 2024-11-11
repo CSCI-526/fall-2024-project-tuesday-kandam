@@ -115,12 +115,13 @@ public class Player : MonoBehaviour
 
     // Metrics
     private Dictionary<PlayerSizeState, int> sizeStateCounts = new Dictionary<PlayerSizeState, int>();
-    private Dictionary<String, int> checkpointRespawnCounts = new Dictionary<String, int>();
+    private Dictionary<string, int> checkpointRespawnCounts = new Dictionary<string, int>();
     private Dictionary<PlayerSizeState, float> sizeStateTimeSpent = new Dictionary<PlayerSizeState, float>();
     private float lastStateChangeTime; // To store the time of the last state change
     private Dictionary<Vector2, int> positionCounts = new Dictionary<Vector2, int>();
 
-    private Dictionary<String, Dictionary<PlayerSizeState, float>> stateSizeTimeSpentPerChkpt = new Dictionary<String, Dictionary<PlayerSizeState, float>>();
+    private Dictionary<string, Dictionary<PlayerSizeState, float>> stateSizeTimeSpentPerChkpt = new Dictionary<string, Dictionary<PlayerSizeState, float>>();
+    private Dictionary<string, int> diamondsCollectedPerCheckpoint = new Dictionary<string, int>();
     private float lastStateChangeTimeperCheckpoint;
     private float recordInterval = 0.5f; // Record every 0.5 seconds
     private float timer = 0f;
@@ -593,6 +594,14 @@ public class Player : MonoBehaviour
             Debug.Log("Collected a diamond!");
             Destroy(other.gameObject);
             dm.diamondCount++;
+            // add diamond collected to checkpoint dict
+            if (!diamondsCollectedPerCheckpoint.ContainsKey(lastCheckpointName))
+            {
+                diamondsCollectedPerCheckpoint[lastCheckpointName] = 0;
+            }
+            diamondsCollectedPerCheckpoint[lastCheckpointName]++;
+            Debug.Log("Diamonds collected at " + lastCheckpointName + ": " + diamondsCollectedPerCheckpoint[lastCheckpointName]);
+
 
             int totalDiamonds = dm.GetTotalDiamonds();
             int seventyPercentDiamonds = Mathf.FloorToInt(totalDiamonds * 0.50f);
@@ -652,22 +661,22 @@ public class Player : MonoBehaviour
             {
                 Debug.Log("Checkpoint: " + kvp.Key + " Respawn count: " + kvp.Value);
             }
-            string checkpoint1 = "Checkpoint 1";
-            string checkpoint2 = "Checkpoint 2";
-            string checkpoint3 = "Checkpoint 3";
-            string checkpoint4 = "Checkpoint 4";
-            string checkpoint5 = "Checkpoint 5";
-            string respawnCount1 = GetRespawnCount(checkpoint1).ToString(); // Example position for checkpoint 1
-            string respawnCount2 = GetRespawnCount(checkpoint2).ToString(); // Example position for checkpoint 1
-            string respawnCount3 = GetRespawnCount(checkpoint3).ToString(); // Example position for checkpoint 2
-            string respawnCount4 = GetRespawnCount(checkpoint4).ToString(); // Example position for checkpoint 1
-            string respawnCount5 = GetRespawnCount(checkpoint5).ToString(); // Example position for checkpoint 2
+            // string checkpoint1 = "Checkpoint 1";
+            // string checkpoint2 = "Checkpoint 2";
+            // string checkpoint3 = "Checkpoint 3";
+            // string checkpoint4 = "Checkpoint 4";
+            // string checkpoint5 = "Checkpoint 5";
+            // string respawnCount1 = GetRespawnCount(checkpoint1).ToString(); // Example position for checkpoint 1
+            // string respawnCount2 = GetRespawnCount(checkpoint2).ToString(); // Example position for checkpoint 1
+            // string respawnCount3 = GetRespawnCount(checkpoint3).ToString(); // Example position for checkpoint 2
+            // string respawnCount4 = GetRespawnCount(checkpoint4).ToString(); // Example position for checkpoint 1
+            // string respawnCount5 = GetRespawnCount(checkpoint5).ToString(); // Example position for checkpoint 2
             Debug.Log("Most common size state: " + mostCommonSizeState);
-            Debug.Log("Respawn count for checkpoint 1: " + respawnCount1);
-            Debug.Log("Respawn count for checkpoint 2: " + respawnCount2);
-            Debug.Log("Respawn count for checkpoint 3: " + respawnCount3);
-            Debug.Log("Respawn count for checkpoint 4: " + respawnCount4);
-            Debug.Log("Respawn count for checkpoint 5: " + respawnCount5);
+            // Debug.Log("Respawn count for checkpoint 1: " + respawnCount1);
+            // Debug.Log("Respawn count for checkpoint 2: " + respawnCount2);
+            // Debug.Log("Respawn count for checkpoint 3: " + respawnCount3);
+            // Debug.Log("Respawn count for checkpoint 4: " + respawnCount4);
+            // Debug.Log("Respawn count for checkpoint 5: " + respawnCount5);
             Debug.Log("Heatmap Coordinates: " + GetSerializedDataHeatmap());
             // Debug.Log("Data: " + stateSizeTimeSpentPerChkpt);
             foreach (var kvp in stateSizeTimeSpentPerChkpt)
@@ -734,6 +743,20 @@ public class Player : MonoBehaviour
 
             // Diamonds collected
             Debug.Log("Diamonds collected from the level: " + dm.diamondCount);
+             List<string> jsonEntriesdiamonds = new List<string>();
+
+            // Iterate through the dictionary
+            foreach (var kvp in diamondsCollectedPerCheckpoint)
+            {
+                // Add each entry in JSON format, where kvp.Key is the checkpoint and kvp.Value is the respawn count
+                jsonEntriesdiamonds.Add($"\"{kvp.Key}\": {kvp.Value}");
+            }
+
+            // Join all entries and format them as a JSON object
+            string finalJsondiamonds = "{" + string.Join(", ", jsonEntriesdiamonds) + "}";
+
+            // Output the final JSON
+            Debug.Log("JSON Data for diamonds: " + finalJsondiamonds);
             googleMetricsSender.GetComponent<SendToGoogle>().Send(mostCommonSizeState, finalJsonsize, finalJson, finalJsonrespawn, dm.diamondCount.ToString(), GetSerializedDataHeatmap());
             Debug.Log("Metrics sent!");
 
