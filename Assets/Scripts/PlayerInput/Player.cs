@@ -757,7 +757,7 @@ public class Player : MonoBehaviour
 
             // Output the final JSON
             Debug.Log("JSON Data for diamonds: " + finalJsondiamonds);
-            googleMetricsSender.GetComponent<SendToGoogle>().Send(mostCommonSizeState, finalJsonsize, finalJson, finalJsonrespawn, dm.diamondCount.ToString(), GetSerializedDataHeatmap());
+            googleMetricsSender.GetComponent<SendToGoogle>().Send(mostCommonSizeState, finalJsonsize, finalJson, finalJsonrespawn, finalJsondiamonds, GetSerializedDataHeatmap());
             Debug.Log("Metrics sent!");
 
             StartCoroutine(LoadSceneAfterDelay());
