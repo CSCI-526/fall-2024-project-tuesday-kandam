@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class SendToGoogle : MonoBehaviour
 {
@@ -21,7 +22,10 @@ public class SendToGoogle : MonoBehaviour
     public string entryDiamondsCollected;
     public string entryHeatmapCoords;
 
+    public bool debugEnabled = true;
+
     private long _sessionID;
+
 
 
     // Start is called before the first frame update
@@ -47,6 +51,12 @@ public class SendToGoogle : MonoBehaviour
 
     public void Send(string mostCommonSizeState, string MCSDataOverall, string MCSDataPerCheckpoint, string RespawnCounts, string DiamondsCollected, string heatmapCoords)
     {
+
+        if (debugEnabled)
+        {
+
+            WriteDataToFile(_sessionID.ToString(), mostCommonSizeState, MCSDataOverall, MCSDataPerCheckpoint, RespawnCounts, DiamondsCollected, heatmapCoords);
+        }
         StartCoroutine(Post(_sessionID.ToString(), mostCommonSizeState, MCSDataOverall, MCSDataPerCheckpoint, RespawnCounts, DiamondsCollected, heatmapCoords));
     }
 
@@ -79,6 +89,36 @@ public class SendToGoogle : MonoBehaviour
             }
         }
     }
+    private void WriteDataToFile(string sessionID, string mostCommonSizeState, string MCSDataOverall, string MCSDataPerCheckpoint, string RespawnCounts, string DiamondsCollected, string heatmapCoords)
+    {
+        string dateTime = System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+        string fileName = "GameDataLog_" + dateTime + ".txt";
+        string logsDirectory = "Assets/Scripts/DebugLogs/";
+        string filePath = logsDirectory + fileName;
+        Debug.Log("Writing data to file: " + filePath);
+        if (!System.IO.Directory.Exists(logsDirectory))
+        {
+            System.IO.Directory.CreateDirectory(logsDirectory);
+        }
+
+        // Prepare the data to write
+        string dataToWrite = "Session ID: " + sessionID + "\n" +
+                             "Scene Name: " + SceneManager.GetActiveScene().name + "\n" +
+                             "Most Common Size State: " + mostCommonSizeState + "\n" +
+                             "MCS Data Overall: " + MCSDataOverall + "\n" +
+                             "MCS Data Per Checkpoint: " + MCSDataPerCheckpoint + "\n" +
+                             "Respawn Counts: " + RespawnCounts + "\n" +
+                             "Diamonds Collected: " + DiamondsCollected + "\n" +
+                             "Heatmap Coordinates: " + heatmapCoords + "\n" +
+                             "--------------------------------------------------\n";
+
+        // Append the data to the file
+        System.IO.File.AppendAllText(filePath, dataToWrite);
+
+        Debug.Log("Data written to file: " + filePath);
+    }
+
+
 
 
 }
