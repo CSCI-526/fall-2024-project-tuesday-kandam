@@ -13424,11 +13424,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 382417926500247114, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -18.7
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 382417926500247114, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 382417926500247114, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
       propertyPath: m_LocalPosition.z
@@ -40228,7 +40228,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6810606369656984960, guid: e4b24374b8684be4797f7546f8081792, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7600221565483470571, guid: e4b24374b8684be4797f7546f8081792, type: 3}
       propertyPath: m_Pivot.x
@@ -57587,6 +57587,7 @@ MonoBehaviour:
   entryRespawnData: entry.563226443
   entryDiamondsCollected: entry.2125984221
   entryHeatmapCoords: entry.1520328151
+  debugEnabled: 1
 --- !u!4 &1081499970
 Transform:
   m_ObjectHideFlags: 0
@@ -66425,6 +66426,10 @@ PrefabInstance:
     - target: {fileID: 3045909998827093379, guid: 369fedcc413789844b655be072eefba8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5421390035219924400, guid: 369fedcc413789844b655be072eefba8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7883094575851975227, guid: 369fedcc413789844b655be072eefba8, type: 3}
       propertyPath: m_Name
