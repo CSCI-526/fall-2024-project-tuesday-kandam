@@ -77,3 +77,4 @@ webgl_sharing
 
 /Assets/Scripts/DebugLogs/
 /Assets/Scripts/DebugLogs.meta
+/Assets/Scripts/Python/**/**/*.meta
