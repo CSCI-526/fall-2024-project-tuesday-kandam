@@ -9,10 +9,10 @@ public class MovingCollision : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        
-        if(other.gameObject.tag.Equals(playerTag))
+        Debug.Log(other.gameObject.tag);
+        if (other.gameObject.tag.Equals(playerTag))
         {
-            Debug.Log("Enter");
+            
             other.gameObject.transform.parent.SetParent(platform);
         }
     }
