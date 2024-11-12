@@ -7,6 +7,7 @@ public class CloseScript : MonoBehaviour
 {
     public GameObject panel;  // Reference to the panel to be closed
     public Button closeButton;  // Reference to the close button
+    public bool activeOnStart = true;
 
     void Start()
     {
@@ -19,7 +20,7 @@ public class CloseScript : MonoBehaviour
         // Optionally, ensure the panel is visible at the start
         if (panel != null)
         {
-            panel.SetActive(true);
+            panel.SetActive(activeOnStart);
         }
     }
 
