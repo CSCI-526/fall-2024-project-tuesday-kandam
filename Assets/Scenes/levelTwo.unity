@@ -57587,7 +57587,7 @@ MonoBehaviour:
   entryRespawnData: entry.563226443
   entryDiamondsCollected: entry.2125984221
   entryHeatmapCoords: entry.1520328151
-  debugEnabled: 1
+  debugEnabled: 0
 --- !u!4 &1081499970
 Transform:
   m_ObjectHideFlags: 0
