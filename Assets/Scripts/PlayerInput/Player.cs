@@ -75,8 +75,6 @@ public class Player : MonoBehaviour
     public float growScaleFactor = 1.5f;
     public float shrinkScaleFactor = 0.5f;
 
-
-
     //public float maxSizeFloatForce = 35f; // Force applied when floating
     //private bool isInFanZone; // Check if player is in the fan zone
     //private bool isMaxSize = false;   // Check if player is at max size
@@ -773,7 +771,6 @@ public class Player : MonoBehaviour
 
         }
     }
-
     public GameObject fiftyPercentText;
 
     private void OnCollisionEnter2D(Collision2D other)
