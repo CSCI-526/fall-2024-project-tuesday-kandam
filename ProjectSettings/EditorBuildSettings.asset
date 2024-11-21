@@ -26,5 +26,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/DummyLevel1.unity
     guid: 12ef43bd41214e643bfa61649bd88c25
+  - enabled: 1
+    path: Assets/Scenes/LevelThree.unity
+    guid: 8a82aeefb1a20124e9b5f04db2b1ce46
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 19de60df2ecc61747b3d0b3d3ecf80be, type: 2}
