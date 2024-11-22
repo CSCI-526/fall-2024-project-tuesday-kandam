@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2610792803057686815}
   - component: {fileID: 2660114892638834445}
   - component: {fileID: 6486158992762954691}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BreakableCrate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
