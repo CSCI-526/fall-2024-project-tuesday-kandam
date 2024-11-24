@@ -8110,6 +8110,14 @@ PrefabInstance:
       propertyPath: googleMetricsSender
       value: 
       objectReference: {fileID: 1081499968}
+    - target: {fileID: 4775953298098998668, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
+      propertyPath: respawnOriginalPos.x
+      value: -16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4775953298098998668, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
+      propertyPath: respawnOriginalPos.y
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6904024381548348842, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
       propertyPath: m_Name
       value: Player

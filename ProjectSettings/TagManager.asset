@@ -14,6 +14,7 @@ TagManager:
   - Hex_Key_Plate
   - Breakable_Brick
   - FanZone
+  - Door
   layers:
   - Default
   - TransparentFX
@@ -50,4 +51,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Arrow
+    uniqueID: 3936767143
     locked: 0
