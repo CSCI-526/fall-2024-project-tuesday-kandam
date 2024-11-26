@@ -11,11 +11,13 @@ public class FanPlatforms : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
+
         if (other.transform.root.gameObject.CompareTag("Player"))
         {
             Player player = other.transform.root.gameObject.GetComponent<Player>();
             if (player != null && player.getPlayerSize() == Player.PlayerSizeState.STATE_LARGE)
             {
+                Debug.Log("Fan Zone");
                 player.body.AddForce(Vector2.up * fanStrength, ForceMode2D.Force);
             }
 
