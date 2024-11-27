@@ -395,11 +395,13 @@ public class Player : MonoBehaviour
             {
                 _prevSizeState = _playerSizeState;
                 _playerSizeState = PlayerSizeState.STATE_LARGE;
+                groundCheckSize.x = 0.57f;
             }
             else
             {
                 _prevSizeState = _playerSizeState;
                 _playerSizeState = PlayerSizeState.STATE_MED;
+                groundCheckSize.x = 0.57f;
             }
             ChangePlayerSizeState();
         }
@@ -413,11 +415,13 @@ public class Player : MonoBehaviour
             {
                 _prevSizeState = _playerSizeState;
                 _playerSizeState = PlayerSizeState.STATE_SMALL;
+                groundCheckSize.x = 0.15f;
             }
             else
             {
                 _prevSizeState = _playerSizeState;
                 _playerSizeState = PlayerSizeState.STATE_MED;
+                groundCheckSize.x = 0.57f;
             }
             ChangePlayerSizeState();
         }

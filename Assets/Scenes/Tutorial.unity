@@ -7505,6 +7505,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 79491096}
     - target: {fileID: 4775953298098998668, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
+      propertyPath: groundCheckSize.x
+      value: 0.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 4775953298098998668, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
       propertyPath: googleMetricsSender
       value: 
       objectReference: {fileID: 1200623201}
