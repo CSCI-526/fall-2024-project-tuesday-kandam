@@ -3394,7 +3394,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.3, y: 10.26, z: -0.9404175}
-  m_LocalScale: {x: 0.35714287, y: 4.171881, z: 1}
+  m_LocalScale: {x: 0.35714287, y: 4.171881, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1910749099}
@@ -15411,7 +15411,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.33571243, y: 10.638302, z: -0.9404175}
-  m_LocalScale: {x: 0.35714287, y: 4.171881, z: 1}
+  m_LocalScale: {x: 0.35714287, y: 4.171881, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1738177502}
@@ -18149,7 +18149,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.32, y: 10.8, z: -0.9404175}
-  m_LocalScale: {x: 0.35714287, y: 4.171881, z: 1}
+  m_LocalScale: {x: 0.35714287, y: 4.171881, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1360462813}
@@ -21151,7 +21151,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.31, y: 10.7, z: -0.9404175}
-  m_LocalScale: {x: 0.35714287, y: 4.171881, z: 1}
+  m_LocalScale: {x: 0.35714287, y: 4.171881, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1281879190}
@@ -22919,7 +22919,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.33064604, y: 10.9, z: -0.9404175}
-  m_LocalScale: {x: 0.35714287, y: 4.171881, z: 1}
+  m_LocalScale: {x: 0.35714287, y: 4.171881, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1119353165}
@@ -39642,7 +39642,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.33, y: 11, z: -0.9404175}
-  m_LocalScale: {x: 0.35714287, y: 4.171881, z: 1}
+  m_LocalScale: {x: 0.35714287, y: 4.171881, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 637159540}
