@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using static Unity.Collections.AllocatorManager;
 
 
 public class Player : MonoBehaviour
@@ -575,12 +576,12 @@ public class Player : MonoBehaviour
     }
 
     public GameObject endText;
-    private int brick = 0;
-    public GameObject HEXKey;
     public GameObject Hex_KeyPlate;
     public GameObject googleMetricsSender;
     public DiamondManager dm;
     public GameObject DoorOpenText;
+    private int brick = 0;
+    public GameObject HEXKey;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -775,6 +776,7 @@ public class Player : MonoBehaviour
 
         }
     }
+
     public GameObject fiftyPercentText;
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -832,6 +834,8 @@ public class Player : MonoBehaviour
             Debug.Log("Touched Hex_Key_Tag");
         }
     }
+
+
 
     // Get the most common size state
     public PlayerSizeState GetMostCommonSizeState()
