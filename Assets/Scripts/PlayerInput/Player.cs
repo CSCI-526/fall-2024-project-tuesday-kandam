@@ -580,8 +580,6 @@ public class Player : MonoBehaviour
     public GameObject googleMetricsSender;
     public DiamondManager dm;
     public GameObject DoorOpenText;
-    private int brick = 0;
-    public GameObject HEXKey;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -776,66 +774,6 @@ public class Player : MonoBehaviour
 
         }
     }
-
-    public GameObject fiftyPercentText;
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-
-        if (other.gameObject.CompareTag("Breakable_Brick"))
-        {
-
-            // Destroy the brick on collision
-            Destroy(other.gameObject);
-            Debug.Log("Brick destroyed!");
-        }
-
-        // Check if the object has the tag 'mario_brick'
-        if (other.gameObject.CompareTag("mario_brick"))
-        {
-            brick++;  // Increment the counter
-
-            // Get the SpriteRenderer component of the brick
-            SpriteRenderer brickRenderer = other.gameObject.GetComponent<SpriteRenderer>();
-
-            if (brick == 1)
-            {
-                // Change the color of the brick to the specified hex color
-                if (brickRenderer != null)
-                {
-                    Color newColor;
-                    if (UnityEngine.ColorUtility.TryParseHtmlString("#9D4649", out newColor))
-                    {
-                        brickRenderer.color = newColor;  // Change to the specified hex color
-                        Debug.Log("Brick color changed to #9D4649!");
-                    }
-                }
-            }
-            else if (brick >= 2)
-            {
-                // Destroy the brick after the second collision
-                Destroy(other.gameObject);
-                Debug.Log("Brick destroyed!");
-
-                HEXKey.SetActive(true); // Make the object visible
-                Debug.Log("Special object is now visible!");
-            }
-            else
-            {
-                Debug.Log("Brick collision count: " + brick);
-            }
-        }
-
-        if (other.gameObject.CompareTag("Hex_Key_Tag")) // Check for the HEXKey
-        {
-            HEXKey.SetActive(false);
-            //Hex_KeyPlate.SetActive(false); // Destroy hexkey_plate object
-            fiftyPercentText.SetActive(true);
-            Debug.Log("Touched Hex_Key_Tag");
-        }
-    }
-
-
 
     // Get the most common size state
     public PlayerSizeState GetMostCommonSizeState()
