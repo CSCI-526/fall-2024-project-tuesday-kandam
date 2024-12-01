@@ -579,7 +579,8 @@ public class Player : MonoBehaviour
     public GameObject Hex_KeyPlate;
     public GameObject googleMetricsSender;
     public DiamondManager dm;
-    public GameObject DoorOpenText;
+    public GameObject ArrowLeft;
+    public GameObject DoorOpenImage;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -606,13 +607,15 @@ public class Player : MonoBehaviour
 
             int totalDiamonds = dm.GetTotalDiamonds();
             int seventyPercentDiamonds = Mathf.FloorToInt(totalDiamonds * 0.50f);
-            Debug.Log("75% of total diamonds: " + seventyPercentDiamonds);
+            Debug.Log("50% of total diamonds: " + seventyPercentDiamonds);
 
             if (dm.diamondCount >= seventyPercentDiamonds)
             {
                 Hex_KeyPlate.SetActive(false);  // Deactivate the Hex_KeyPlate
-                Debug.Log("Hex KeyPlate deactivated as 75% of diamonds were collected.");
-                DoorOpenText.SetActive(true);
+                Debug.Log("Hex KeyPlate deactivated as 50% of diamonds were collected.");
+
+                ArrowLeft.SetActive(true);
+                DoorOpenImage.SetActive(true);
             }
         }
 
