@@ -606,7 +606,7 @@ public class Player : MonoBehaviour
 
 
             int totalDiamonds = dm.GetTotalDiamonds();
-            int seventyPercentDiamonds = Mathf.FloorToInt(totalDiamonds * 0.10f);
+            int seventyPercentDiamonds = Mathf.FloorToInt(totalDiamonds * 0.50f);
             Debug.Log("50% of total diamonds: " + seventyPercentDiamonds);
 
             if (dm.diamondCount >= seventyPercentDiamonds)
