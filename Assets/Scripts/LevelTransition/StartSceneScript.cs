@@ -7,6 +7,6 @@ public class StartSceneScript : MonoBehaviour
 {
     public void OnPlayButton()
     {
-        SceneManager.LoadScene("LevelSelectionScene");
+        SceneManager.LoadScene("1. LevelSelectionScene");
     }
 }

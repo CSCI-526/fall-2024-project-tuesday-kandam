@@ -1000,6 +1000,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7778761013784715305, guid: 066c5c0f6a208c44e92d7bba0ca34144, type: 3}
   m_PrefabInstance: {fileID: 19444550}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &21394702 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5421390035219924400, guid: 369fedcc413789844b655be072eefba8, type: 3}
+  m_PrefabInstance: {fileID: 1264850658}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &25005815
 GameObject:
   m_ObjectHideFlags: 0
@@ -8696,7 +8701,7 @@ PrefabInstance:
     - target: {fileID: 4775953298098998668, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
       propertyPath: Hex_KeyPlate
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21394702}
     - target: {fileID: 4775953298098998668, guid: bbefb5fb536720b41a62f9959c7e4b32, type: 3}
       propertyPath: DoorOpenImage
       value: 
@@ -11990,6 +11995,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1513508623040591712, guid: e90afcc86e6f3a34c9ec081142f34a28, type: 3}
+      propertyPath: m_text
+      value: You Win the Game!!
+      objectReference: {fileID: 0}
     - target: {fileID: 3438537215870023267, guid: e90afcc86e6f3a34c9ec081142f34a28, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -12028,7 +12037,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4295160404625726877, guid: e90afcc86e6f3a34c9ec081142f34a28, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4295160404625726877, guid: e90afcc86e6f3a34c9ec081142f34a28, type: 3}
       propertyPath: m_SizeDelta.y
@@ -12064,11 +12073,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4295160404625726877, guid: e90afcc86e6f3a34c9ec081142f34a28, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 532.1
+      value: -16.9
       objectReference: {fileID: 0}
     - target: {fileID: 4295160404625726877, guid: e90afcc86e6f3a34c9ec081142f34a28, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 89.05
+      value: -424.1
       objectReference: {fileID: 0}
     - target: {fileID: 4295160404625726877, guid: e90afcc86e6f3a34c9ec081142f34a28, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -12081,6 +12090,10 @@ PrefabInstance:
     - target: {fileID: 4295160404625726877, guid: e90afcc86e6f3a34c9ec081142f34a28, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5332137154996179520, guid: e90afcc86e6f3a34c9ec081142f34a28, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -5.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

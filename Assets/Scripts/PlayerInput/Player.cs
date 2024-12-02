@@ -606,7 +606,7 @@ public class Player : MonoBehaviour
 
 
             int totalDiamonds = dm.GetTotalDiamonds();
-            int seventyPercentDiamonds = Mathf.FloorToInt(totalDiamonds * 0.50f);
+            int seventyPercentDiamonds = Mathf.FloorToInt(totalDiamonds * 0.10f);
             Debug.Log("50% of total diamonds: " + seventyPercentDiamonds);
 
             if (dm.diamondCount >= seventyPercentDiamonds)
@@ -772,9 +772,20 @@ public class Player : MonoBehaviour
                 yield return new WaitForSeconds(1f);
 
                 int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+                Debug.Log("Current Scene Index: " + currentSceneIndex);
 
-                // Load the next scene based on the build index
-                SceneManager.LoadScene(currentSceneIndex + 1);
+                if (currentSceneIndex == 5)
+                {
+                    yield return new WaitForSeconds(3f);
+                    SceneManager.LoadScene("0. StartScene");
+                }
+                else
+                {
+                    // Load the next scene based on the build index
+                    SceneManager.LoadScene(currentSceneIndex + 1);
+                }
+
+                
             }
 
         }
