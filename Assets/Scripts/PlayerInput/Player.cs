@@ -771,8 +771,10 @@ public class Player : MonoBehaviour
                 // Wait for 1 seconds
                 yield return new WaitForSeconds(1f);
 
-                // Load the scene
-                SceneManager.LoadScene("LevelSelectionScene");
+                int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+                // Load the next scene based on the build index
+                SceneManager.LoadScene(currentSceneIndex + 1);
             }
 
         }
