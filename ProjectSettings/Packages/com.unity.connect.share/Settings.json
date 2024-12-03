@@ -19,7 +19,7 @@
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "buildOutputDirList",
-                "value": "{\"m_Value\":\"/Users/dhiganthrao/Downloads/Documents/Studies/USC/Sem 5/CSCI526/UnityProjects/game-builds/gold-progress;/Users/dhiganthrao/Downloads/Documents/Studies/USC/Sem 5/CSCI526/UnityProjects/game-builds/beta-progress-w2;/Users/dhiganthrao/Downloads/Documents/Studies/USC/Sem 5/CSCI526/UnityProjects/game-builds/beta-progress;D:/CSCI526/HW2/Webhost/Build;D:/Unity-Github/paired-prototype-f24-tuesday-amn/Build;D:/Unity-Github/paired-prototype-f24-tuesday-amn/builds;D:/Unity-Github/paired-prototype-f24-tuesday-amn/WebGL Builds;;;\"}"
+                "value": "{\"m_Value\":\"/Users/dhiganthrao/Downloads/Documents/Studies/USC/Sem 5/CSCI526/UnityProjects/game-builds/gold-progress-w2;/Users/dhiganthrao/Downloads/Documents/Studies/USC/Sem 5/CSCI526/UnityProjects/game-builds/gold-progress;/Users/dhiganthrao/Downloads/Documents/Studies/USC/Sem 5/CSCI526/UnityProjects/game-builds/beta-progress-w2;/Users/dhiganthrao/Downloads/Documents/Studies/USC/Sem 5/CSCI526/UnityProjects/game-builds/beta-progress;D:/CSCI526/HW2/Webhost/Build;D:/Unity-Github/paired-prototype-f24-tuesday-amn/Build;D:/Unity-Github/paired-prototype-f24-tuesday-amn/builds;D:/Unity-Github/paired-prototype-f24-tuesday-amn/WebGL Builds;;\"}"
             }
         ]
     }
