@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using static Unity.Collections.AllocatorManager;
 
 
 public class Player : MonoBehaviour
@@ -395,11 +396,13 @@ public class Player : MonoBehaviour
             {
                 _prevSizeState = _playerSizeState;
                 _playerSizeState = PlayerSizeState.STATE_LARGE;
+                groundCheckSize.x = 0.57f;
             }
             else
             {
                 _prevSizeState = _playerSizeState;
                 _playerSizeState = PlayerSizeState.STATE_MED;
+                groundCheckSize.x = 0.57f;
             }
             ChangePlayerSizeState();
         }
@@ -413,11 +416,13 @@ public class Player : MonoBehaviour
             {
                 _prevSizeState = _playerSizeState;
                 _playerSizeState = PlayerSizeState.STATE_SMALL;
+                groundCheckSize.x = 0.15f;
             }
             else
             {
                 _prevSizeState = _playerSizeState;
                 _playerSizeState = PlayerSizeState.STATE_MED;
+                groundCheckSize.x = 0.57f;
             }
             ChangePlayerSizeState();
         }
@@ -571,12 +576,11 @@ public class Player : MonoBehaviour
     }
 
     public GameObject endText;
-    private int brick = 0;
-    public GameObject HEXKey;
     public GameObject Hex_KeyPlate;
     public GameObject googleMetricsSender;
     public DiamondManager dm;
-    public GameObject DoorOpenText;
+    public GameObject ArrowLeft;
+    public GameObject DoorOpenImage;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -603,13 +607,15 @@ public class Player : MonoBehaviour
 
             int totalDiamonds = dm.GetTotalDiamonds();
             int seventyPercentDiamonds = Mathf.FloorToInt(totalDiamonds * 0.50f);
-            Debug.Log("75% of total diamonds: " + seventyPercentDiamonds);
+            Debug.Log("50% of total diamonds: " + seventyPercentDiamonds);
 
             if (dm.diamondCount >= seventyPercentDiamonds)
             {
                 Hex_KeyPlate.SetActive(false);  // Deactivate the Hex_KeyPlate
-                Debug.Log("Hex KeyPlate deactivated as 75% of diamonds were collected.");
-                DoorOpenText.SetActive(true);
+                Debug.Log("Hex KeyPlate deactivated as 50% of diamonds were collected.");
+
+                ArrowLeft.SetActive(true);
+                DoorOpenImage.SetActive(true);
             }
         }
 
@@ -765,67 +771,23 @@ public class Player : MonoBehaviour
                 // Wait for 1 seconds
                 yield return new WaitForSeconds(1f);
 
-                // Load the scene
-                SceneManager.LoadScene("LevelSelectionScene");
-            }
+                int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+                Debug.Log("Current Scene Index: " + currentSceneIndex);
 
-        }
-    }
-    public GameObject fiftyPercentText;
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-
-        if (other.gameObject.CompareTag("Breakable_Brick"))
-        {
-
-            // Destroy the brick on collision
-            Destroy(other.gameObject);
-            Debug.Log("Brick destroyed!");
-        }
-
-        // Check if the object has the tag 'mario_brick'
-        if (other.gameObject.CompareTag("mario_brick"))
-        {
-            brick++;  // Increment the counter
-
-            // Get the SpriteRenderer component of the brick
-            SpriteRenderer brickRenderer = other.gameObject.GetComponent<SpriteRenderer>();
-
-            if (brick == 1)
-            {
-                // Change the color of the brick to the specified hex color
-                if (brickRenderer != null)
+                if (currentSceneIndex == 5)
                 {
-                    Color newColor;
-                    if (UnityEngine.ColorUtility.TryParseHtmlString("#9D4649", out newColor))
-                    {
-                        brickRenderer.color = newColor;  // Change to the specified hex color
-                        Debug.Log("Brick color changed to #9D4649!");
-                    }
+                    yield return new WaitForSeconds(3f);
+                    SceneManager.LoadScene("0. StartScene");
                 }
-            }
-            else if (brick >= 2)
-            {
-                // Destroy the brick after the second collision
-                Destroy(other.gameObject);
-                Debug.Log("Brick destroyed!");
+                else
+                {
+                    // Load the next scene based on the build index
+                    SceneManager.LoadScene(currentSceneIndex + 1);
+                }
 
-                HEXKey.SetActive(true); // Make the object visible
-                Debug.Log("Special object is now visible!");
+                
             }
-            else
-            {
-                Debug.Log("Brick collision count: " + brick);
-            }
-        }
 
-        if (other.gameObject.CompareTag("Hex_Key_Tag")) // Check for the HEXKey
-        {
-            HEXKey.SetActive(false);
-            //Hex_KeyPlate.SetActive(false); // Destroy hexkey_plate object
-            fiftyPercentText.SetActive(true);
-            Debug.Log("Touched Hex_Key_Tag");
         }
     }
 

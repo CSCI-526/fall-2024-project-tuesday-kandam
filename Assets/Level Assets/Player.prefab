@@ -89,7 +89,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.98679245, b: 0.98679245, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -487,7 +487,7 @@ MonoBehaviour:
   SplayerMass: 30
   SjumpHeight: 5
   groundCheckPos: {fileID: 5966516440216960745}
-  groundCheckSize: {x: 1.06, y: 0.14}
+  groundCheckSize: {x: 0.57, y: 0.14}
   ground:
     serializedVersion: 2
     m_Bits: 128
@@ -498,12 +498,11 @@ MonoBehaviour:
   _playerSizeState: 0
   respawnOriginalPos: {x: -17, y: 2, z: 0}
   endText: {fileID: 0}
-  HEXKey: {fileID: 0}
   Hex_KeyPlate: {fileID: 0}
   googleMetricsSender: {fileID: 0}
   dm: {fileID: 0}
-  DoorOpenText: {fileID: 0}
-  fiftyPercentText: {fileID: 0}
+  ArrowLeft: {fileID: 0}
+  DoorOpenImage: {fileID: 0}
 --- !u!114 &328931630357457922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -650,7 +649,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -672,7 +671,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.98490566, g: 0.9793307, b: 0.9793307, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -765,7 +764,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
